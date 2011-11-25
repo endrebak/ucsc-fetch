@@ -20,6 +20,8 @@ import sys
 import mechanize
 import cookielib
 import ConfigParser
+import re
+
 
 
 def get_options():
@@ -118,6 +120,10 @@ def initialize_browser(browseroptions):
     if browseroptions["httpproxy"] != '':
         # proxy password not implemented
         br.setproxies({'http': "%s:%s" % (browseroptions['httproxy'], browseroptions['httproxy_port'])})
+
+    if browseroptions['username'] != '':
+        baseurl = re.findall('http://.*?/', browseroptions['ucsc_base_url'])[0]
+        br.add_password(baseurl, browseroptions['username'], browseroptions['password'])
 
     return br
 
