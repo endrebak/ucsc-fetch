@@ -13,7 +13,7 @@ Usage:
 
 In order to use this script, you need to edit and customize three files: the
 Regions file, the Tracks file, and the Browser config file. Most of these have
-default values included in this distribution, but be sure to change your **email
+default values included in this distribution, but **be sure to change your email
 address** in the Browser config file, otherwise the script will refuse to work.
 
 1. the Regions file
@@ -66,7 +66,7 @@ Example:
     phyloP46wayPlacental=hide
 
 3. the Browser config file
------------------------
+---------------------------
 
 The Browser config file contains the URL to the UCSC browser, your email
 address, and options to set an HTTP Proxy.
