@@ -191,17 +191,22 @@ def initialize_browser(browseroptions):
 
     return br
 
-def get_screenshot(br, browseroptions, tracksoptions_string):
+def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, end, label):
     """
     Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
     """
-    print (browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on')
-    br.open(browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on')
+    target_url = browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on' + "position=%s:%s-%s" % (chromosome, start ,end)
+    print(target_url)
+    br.open(target_url)
 
     pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
     response = br.open(pdf_url)
     
     pdf_contents = response.read()
+
+    pdf_file = open("results/%s.pdf" % label, 'w')
+    pdf_file.write(pdf_contents)
+    pdf_file.close()
 
     return pdf_contents
 
@@ -215,6 +220,8 @@ if __name__ == '__main__':
 
     trackoptions_string = get_tracks_options(options.tracksfile)
 
-#    response = get_screenshot(br, browseroptions, trackoptions_string)
     regions = get_regions(options.regionsfile)
+    for region in regions:
+        (label, chromosome, start, end) = region
+        response = get_screenshot(br, browseroptions, trackoptions_string, chromosome, start, end, label)
 #    main()
