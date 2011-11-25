@@ -19,6 +19,7 @@ import optparse
 import sys 
 import mechanize
 import cookielib
+import ConfigParser
 
 
 def get_options():
@@ -26,10 +27,10 @@ def get_options():
 
     parser.add_option('-r', '--regions', '--regions_file', '--region', dest='regionsfile',
             help='CSV file containing list of regions to analyze', default='')
-    parser.add_option('-o', '-t', '--options', '--tracks', '--config', '--params', dest='tracksfile',
+    parser.add_option('-t', '--tracks', '--params', dest='tracksfile',
             help='file containing list of tracks to show, and other parameters', default='')
-    parser.add_option('-u', '--ucsc', '--ucsc_file', dest='ucsc_file',
-            help='file containing URL to the UCSC browser, and eventually username and password', default='params/ucsc.default')
+    parser.add_option('-u', '--ucsc', '--ucsc_file', '--browser', '--config', '--browser_config', dest='browser_config_file',
+            help='file containing URL to the UCSC browser, and eventually username and password', default='params/default.txt')
 
     (options, args) = parser.parse_args()
 
@@ -47,7 +48,43 @@ def get_options():
 
     return (options, args)
 
-def initialize_browser():
+
+def get_browser_config(optionsfile):
+    """
+    Scan a browser options file for parameters.
+
+    example browser options file:
+
+    :: 
+        [browser]
+        ucsc_base_url = http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18
+        username =
+        password =
+        User-agent = Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1
+        email = 
+
+        [proxy]
+        proxy = 
+        port =
+        password = 
+    """
+    browseroptions = {}
+    configparser = ConfigParser.ConfigParser()
+    configparser.read(optionsfile)
+#    print(configparser.items("browser"))
+#    print configparser.options("browser")
+    browseroptions = dict(configparser.items("browser"))
+
+    if browseroptions['email'] == '':
+        raise ConfigParser.Error('the email field is required. Please edit %s and add your email address' % optionsfile)
+
+    return browseroptions
+#    return configparser
+
+
+
+
+def initialize_browser(browseroptions):
     """
     initialize a Browser object.
 
@@ -75,8 +112,8 @@ def initialize_browser():
 #    br.set_debug_responses(True)
 
     # User-Agent (this is cheating, ok?)
-    br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-    br.addheaders.append(('email', 'giovanni.dallolio@upf.edu'))
+    br.addheaders = [('User-agent', browseroptions['user-agent'])]
+    br.addheaders.append(('email', browseroptions['email']))
 
     return br
 
@@ -98,7 +135,11 @@ basicurl = """http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18&
     &knownGene=hide
     &rmsk=hide"""
 
+#def main():
 if __name__ == '__main__':
-    get_options()
-    initialize_browser()
+    (options, args) = get_options()
+    browseroptions = get_browser_config(options.browser_config_file)
+    print browseroptions
+#    br = initialize_browser()
 
+#    main()
