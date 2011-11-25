@@ -83,8 +83,49 @@ def get_browser_config(optionsfile):
     return browseroptions
 #    return configparser
 
+def get_chromosome_positions(regionsfile):
+    """
+    Scan a config Regions file for parameters
 
+    Example Regions file:
 
+    :: 
+
+        chromosome  start   end label
+        chr1    10000    20000  sampleregion
+    """
+
+def get_tracks_options(tracksfile):
+    """
+    Parse a Tracks options file, to determine which tracks to turn off and on.
+
+    Example Tracks file:
+
+        [visual_options]
+
+        [tracks]
+        wgRna=hide
+        cpgIslandExt=pack
+        ensGene=hide
+        mrna=hide
+        intronEst=hide
+        mgcGenes=hide
+        hgt.psOutput=on
+        cons44way=hide
+        snp130=hide
+        snpArray=hide
+        wgEncodeReg=hide
+        pix=1000
+        refGene=pack
+        knownGene=hide
+        rmsk=hide
+
+    Returns a string that can be attached to the base ucsc URL
+
+    """
+    parser = ConfigParser.ConfigParser()
+    parser.read(tracksfile)
+    parser.items("tracks")
 
 def initialize_browser(browseroptions):
     """
@@ -126,6 +167,12 @@ def initialize_browser(browseroptions):
         br.add_password(baseurl, browseroptions['username'], browseroptions['password'])
 
     return br
+
+def get_screenshot(browseroptions):
+    """
+    Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
+    """
+    pass
 
 
 #def main():
