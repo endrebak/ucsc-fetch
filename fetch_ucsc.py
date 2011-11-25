@@ -11,7 +11,7 @@ Input files:
 
  * regions file: contains a list of regions to be analyzed
  * tracks file: contains which tracks to include, and which options
- * uscs file: a file containing the url to the UCSC browser, and username/password for custom UCSC instances
+ * browser options file: a file containing the url to the UCSC browser, and username/password for custom UCSC instances. All the options that depend on which UCSC you want to connect to or on your configuration
 
 """
 
@@ -30,7 +30,7 @@ def get_options():
     parser.add_option('-t', '--tracks', '--params', dest='tracksfile',
             help='file containing list of tracks to show, and other parameters', default='')
     parser.add_option('-u', '--ucsc', '--ucsc_file', '--browser', '--config', '--browser_config', dest='browser_config_file',
-            help='file containing URL to the UCSC browser, and eventually username and password', default='params/default.txt')
+            help='file containing URL to the UCSC browser, and eventually username and password', default='params/browser_config/default.txt')
 
     (options, args) = parser.parse_args()
 
@@ -115,31 +115,18 @@ def initialize_browser(browseroptions):
     br.addheaders = [('User-agent', browseroptions['user-agent'])]
     br.addheaders.append(('email', browseroptions['email']))
 
+    if browseroptions["httpproxy"] != '':
+        # proxy password not implemented
+        br.setproxies({'http': "%s:%s" % (browseroptions['httproxy'], browseroptions['httproxy_port'])})
+
     return br
 
-
-basicurl = """http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18&
-    wgRna=hide
-    &cpgIslandExt=pack
-    &ensGene=hide
-    &mrna=hide
-    &intronEst=hide
-    &mgcGenes=hide
-    &hgt.psOutput=on
-    &cons44way=hide
-    &snp130=hide
-    &snpArray=hide
-    &wgEncodeReg=hide
-    &pix=1000
-    &refGene=pack
-    &knownGene=hide
-    &rmsk=hide"""
 
 #def main():
 if __name__ == '__main__':
     (options, args) = get_options()
     browseroptions = get_browser_config(options.browser_config_file)
     print browseroptions
-#    br = initialize_browser()
+    br = initialize_browser(browseroptions)
 
 #    main()
