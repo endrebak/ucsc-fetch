@@ -1,21 +1,25 @@
 [visual_options]
 
 
+[database]
+org=Human
+db=hg18
+pix=1000
+
 [tracks]
 wgRna=hide
-cpgIslandExt=pack
+wgEncodeReg=hide
+cpgIslandExt=hide
 ensGene=hide
 mrna=hide
 intronEst=hide
 mgcGenes=hide
-hgt.psOutput=on
 cons44way=hide
 snp130=hide
 snpArray=hide
-wgEncodeReg=hide
-pix=1000
-refGene=pack
+refGene=hide
 knownGene=hide
 rmsk=hide
+phyloP46wayPlacental=hide
 
 

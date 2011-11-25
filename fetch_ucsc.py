@@ -147,6 +147,7 @@ def get_tracks_options(tracksfile):
 
     tracksfile_string = '&'.join(['='.join(i) for i in parser.items('tracks')])
     tracksfile_string += '&'.join(['='.join(i) for i in parser.items('visual_options')])
+    tracksfile_string += '&'.join(['='.join(i) for i in parser.items('database')])
 
     return tracksfile_string
 
