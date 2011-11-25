@@ -1,0 +1,9 @@
+[browser]
+ucsc_base_url = http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18
+username =
+password =
+
+[proxy]
+proxy = 
+port =
+password =
