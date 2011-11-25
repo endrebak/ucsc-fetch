@@ -21,7 +21,7 @@ import mechanize
 import cookielib
 import ConfigParser
 import re
-
+import time
 import csv
 
 
@@ -211,6 +211,8 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, 
     pdf_file = open("results/%s.pdf" % label, 'w')
     pdf_file.write(pdf_contents)
     pdf_file.close()
+    
+    time.sleep(1)
 
     return pdf_contents
 
