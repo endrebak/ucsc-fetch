@@ -22,6 +22,7 @@ import cookielib
 import ConfigParser
 import re
 
+import csv
 
 
 def get_options():
@@ -83,7 +84,7 @@ def get_browser_config(optionsfile):
     return browseroptions
 #    return configparser
 
-def get_chromosome_positions(regionsfile):
+def get_regions(regionsfile):
     """
     Scan a config Regions file for parameters
 
@@ -91,10 +92,26 @@ def get_chromosome_positions(regionsfile):
 
     :: 
 
-        label   chromosome  start   end
+        #label   chromosome  start   end
         sampleregion    chr1    10000    20000
         gene1   chr2    2000    3000
     """
+    regions = []
+
+    regionsfile_contents = open(regionsfile, 'r')
+    for line in regionsfile_contents:
+        if line.startswith('#'):
+            pass
+        else:
+            fields = line.split()
+            (label, chromosome, start, end) = fields[0:4]
+            if not chromosome.startswith('chr'):
+                chromosome = 'chr' + chromosome
+
+            regions.append((label, chromosome, start, end))
+
+    return regions
+
 
 def get_tracks_options(tracksfile):
     """
@@ -198,7 +215,6 @@ if __name__ == '__main__':
 
     trackoptions_string = get_tracks_options(options.tracksfile)
 
-    response = get_screenshot(br, browseroptions, trackoptions_string)
-
-    options.regionsfile
+#    response = get_screenshot(br, browseroptions, trackoptions_string)
+    regions = get_regions(options.regionsfile)
 #    main()
