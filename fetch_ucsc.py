@@ -142,8 +142,11 @@ def get_tracks_options(tracksfile):
 
     """
     parser = ConfigParser.ConfigParser()
+    parser.optionxform = str
+
     parser.read(tracksfile)
 #    parser.items("tracks")
+    print parser.items('tracks')
 
     tracksfile_string = '&'.join(['='.join(i) for i in parser.items('tracks')])
     tracksfile_string += '&'.join(['='.join(i) for i in parser.items('visual_options')])
@@ -196,7 +199,7 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, 
     """
     Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
     """
-    target_url = browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on' + "position=%s:%s-%s" % (chromosome, start ,end)
+    target_url = browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on' + "&position=%s:%s-%s" % (chromosome, start ,end)
     print(target_url)
     br.open(target_url)
 
