@@ -91,8 +91,9 @@ def get_chromosome_positions(regionsfile):
 
     :: 
 
-        chromosome  start   end label
-        chr1    10000    20000  sampleregion
+        label   chromosome  start   end
+        sampleregion    chr1    10000    20000
+        gene1   chr2    2000    3000
     """
 
 def get_tracks_options(tracksfile):
@@ -125,7 +126,12 @@ def get_tracks_options(tracksfile):
     """
     parser = ConfigParser.ConfigParser()
     parser.read(tracksfile)
-    parser.items("tracks")
+#    parser.items("tracks")
+
+    tracksfile_string = '&'.join(['='.join(i) for i in parser.items('tracks')])
+    tracksfile_string += '&'.join(['='.join(i) for i in parser.items('visual_options')])
+
+    return tracksfile_string
 
 def initialize_browser(browseroptions):
     """
@@ -168,11 +174,19 @@ def initialize_browser(browseroptions):
 
     return br
 
-def get_screenshot(browseroptions):
+def get_screenshot(br, browseroptions, tracksoptions_string):
     """
     Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
     """
-    pass
+    print (browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on')
+    br.open(browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on')
+
+    pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
+    response = br.open(pdf_url)
+    
+    pdf_contents = response.read()
+
+    return pdf_contents
 
 
 #def main():
@@ -182,4 +196,9 @@ if __name__ == '__main__':
     print browseroptions
     br = initialize_browser(browseroptions)
 
+    trackoptions_string = get_tracks_options(options.tracksfile)
+
+    response = get_screenshot(br, browseroptions, trackoptions_string)
+
+    options.regionsfile
 #    main()
