@@ -31,6 +31,7 @@ Example:
     DPM1    20  49551405    49575060
     DPAGT1  11  118967214  118972785
 
+Look at params/regions/default.txt for an example Regions file.
 
 2. the Tracks file
 -------------------
@@ -65,6 +66,8 @@ Example:
     rmsk=hide
     phyloP46wayPlacental=hide
 
+Look at params/tracks_options/default.txt for an example Regions file.
+
 3. the Browser config file
 ---------------------------
 
@@ -94,3 +97,4 @@ Example:
     httproxy_port =
     httproxy_password =
 
+Look at params/browser_config/default.txt for an example Regions file.
