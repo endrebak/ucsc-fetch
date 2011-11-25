@@ -21,7 +21,8 @@ one per line.
 
 Example:
 
-::  
+::
+  
     #label   chromosome  start end
     DPM2    9   130697374   130700763
     DPM1    20  49551405    49575060
@@ -37,8 +38,8 @@ database and organism to use.
 Example:
 
 ::
-    [visual_options]
 
+    [visual_options]
 
     [database]
     org=Human
@@ -75,4 +76,18 @@ files of the UCSC server, and will be used by UCSC administrators in case they
 need to contact you about usage policy. Be careful not to exceed with the
 queries, as this may create problems to other users of the UCSC browser.
 
+Example: 
+
+::
+
+    [browser]
+    ucsc_base_url = http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18
+    username =
+    password =
+    user-agent = Mechanize client to get screenshots from the UCSC browser. Home
+    page: https://bitbucket.org/dalloliogm/ucsc-fetch
+    email = 
+    httpproxy = 
+    httproxy_port =
+    httproxy_password =
 
