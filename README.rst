@@ -11,7 +11,10 @@ usage:
 
     $: python fetch_ucsc.py --regions <regions file> --tracks <tracks file> --browser_config <browser config file>
 
-In order to use this script, you need to edit and customize three files.
+In order to use this script, you need to edit and customize three files: the
+Regions file, the Tracks file, and the Browser config file. Most of these have
+default values included in this distribution, but be sure to change your **email
+address** in the Browser config file, otherwise the script will refuse to work.
 
 the Regions file
 ----------------
@@ -71,7 +74,7 @@ address, and options to set an HTTP Proxy.
 You can change the UCSC URL to point to a custom UCSC browser installation, if
 you have.
 
-It is *important* to define an email address. This will be shown in the log
+It is **important** to define an email address. This will be shown in the log
 files of the UCSC server, and will be used by UCSC administrators in case they
 need to contact you about usage policy. Be careful not to exceed with the
 queries, as this may create problems to other users of the UCSC browser.
