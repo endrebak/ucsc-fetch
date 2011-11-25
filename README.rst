@@ -6,7 +6,7 @@ UCSC fetch
 A script to fetch screenshots from the UCSC browser
 
 
-usage:
+Usage:
 ++++++
 
     $: python fetch_ucsc.py --regions <regions file> --tracks <tracks file> --browser_config <browser config file>
@@ -16,8 +16,8 @@ Regions file, the Tracks file, and the Browser config file. Most of these have
 default values included in this distribution, but be sure to change your **email
 address** in the Browser config file, otherwise the script will refuse to work.
 
-the Regions file
-----------------
+1. the Regions file
+-------------------
 
 The regions file is a tab-separated file containing the regions to be displayed,
 one per line.
@@ -32,8 +32,8 @@ Example:
     DPAGT1  11  118967214  118972785
 
 
-the Tracks file
----------------
+2. the Tracks file
+-------------------
 
 The tracks file contains the configuration of which tracks to show, and of which
 database and organism to use.
@@ -65,7 +65,7 @@ Example:
     rmsk=hide
     phyloP46wayPlacental=hide
 
-the Browser config file
+3. the Browser config file
 -----------------------
 
 The Browser config file contains the URL to the UCSC browser, your email
