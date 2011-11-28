@@ -105,6 +105,7 @@ def get_regions(regionsfile):
         #label   chromosome  start   end    upstream    downstream
         sampleregion    chr1    10000    20000  0   0
         gene1   chr2    2000    3000    0   0
+        gene1_1000window   chr2    2000    3000    1000 1000
 
     """
     regions = []
