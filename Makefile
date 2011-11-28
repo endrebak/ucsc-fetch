@@ -3,4 +3,4 @@ test:
 
 
 ibe:
-	ipython fetch_ucsc.py -- -r params/regions/default.txt -t params/tracks_options/default.txt -u params/browser_config/ibe.txt
+	ipython fetch_ucsc.py -- -r params/regions/ibe.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt

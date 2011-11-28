@@ -1,0 +1,6 @@
+syntax: glob
+params/browser_config/ibe.txt
+params/tracks_options/ibe.txt
+params/regions/ibe.txt
+*.swp
+results/*.pdf
