@@ -1,4 +1,4 @@
-#label   chromosome  start end  upstream    downstream  description
-DPM2    9   130697374   130700763   0   0   DPM2
-DPM1    20  49551405    49575060    0   0   DPM1
-DPAGT1  11  118967214  118972785    0   0   DPAGT1
+#label	chromosome	start	end	upstream	downstream
+DPM2	9	130697374	130700763	0	0
+DPM1	20	49551405	49575060	0	0
+DPAGT1	11	118967214	118972785	0	0

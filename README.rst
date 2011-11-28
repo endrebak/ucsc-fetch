@@ -26,10 +26,10 @@ Example:
 
 ::
   
-    #label   chromosome  start end  upstream    downstream  description
-    DPM2    9   130697374   130700763   0   0   "DPM2 Gene"
-    DPM1    20  49551405    49575060    0   0   "DPM1 Gene"
-    DPAGT1  11  118967214  118972785    0   0   "DPAGT1 Gene, aka ALG7 in Yeast"
+    #label   chromosome  start end  upstream    downstream
+    DPM2    9   130697374   130700763   0   0
+    DPM1    20  49551405    49575060    0   0
+    DPAGT1  11  118967214  118972785    0   0
 
 Look at params/regions/default.txt for an example Regions file.
 
