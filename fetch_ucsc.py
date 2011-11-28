@@ -95,6 +95,17 @@ def get_regions(regionsfile):
         #label   chromosome  start   end
         sampleregion    chr1    10000    20000
         gene1   chr2    2000    3000
+
+    Optionally, the region files can contain three additional columns: upstream, downstream and description. 
+    Upstream and Downstream are two utility options to zoom out of the region. It is useful if you have a set of gene coordinates, and don't want to calculate an upstream and downstream margins manually.
+
+
+    ::
+
+        #label   chromosome  start   end    upstream    downstream  description
+        sampleregion    chr1    10000    20000  0   0   "A sample Region."
+        gene1   chr2    2000    3000    0   0   "A Gene."
+
     """
     regions = []
 
@@ -103,12 +114,17 @@ def get_regions(regionsfile):
         if line.startswith('#'):
             pass
         else:
-            fields = line.split()
-            (label, chromosome, start, end) = fields[0:4]
+            fields = line.split('\t')
+            if len(fields) == 4:
+                (label, chromosome, start, end) = fields[0:4]
+                description = ''
+            else:
+                (label, chromosome, start, end, upstream, downstream, description) = fields[0:7]
+                start = start - upstream
+                end = end + downstream
             if not chromosome.startswith('chr'):
                 chromosome = 'chr' + chromosome
-
-            regions.append((label, chromosome, start, end))
+            regions.append((label, chromosome, start, end, description))
 
     return regions
 
