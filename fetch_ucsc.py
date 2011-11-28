@@ -120,8 +120,8 @@ def get_regions(regionsfile):
                 description = ''
             else:
                 (label, chromosome, start, end, upstream, downstream) = fields[0:6]
-                start = start - upstream
-                end = end + downstream
+                start = str(int(start) - int(upstream))
+                end = str(int(end) + int(downstream))
             if not chromosome.startswith('chr'):
                 chromosome = 'chr' + chromosome
             regions.append((label, chromosome, start, end))
