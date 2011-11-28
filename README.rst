@@ -20,7 +20,7 @@ address** in the Browser config file, otherwise the script will refuse to work.
 -------------------
 
 The regions file is a tab-separated file containing the regions to be displayed,
-one per line.
+one per line. The script will generate a separate .pdf file for each entry in this file.
 
 Example:
 
@@ -37,7 +37,7 @@ Look at params/regions/default.txt for an example Regions file.
 -------------------
 
 The tracks file contains the configuration of which tracks to show, and of which
-database and organism to use.
+database and organism to use. For each entry in the Regions file, the script will generate a pdf with the same tracks for each.
 
 Example:
 
