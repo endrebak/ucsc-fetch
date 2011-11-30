@@ -167,9 +167,11 @@ def get_tracks_options(tracksfile):
 #    parser.items("tracks")
     print parser.items('tracks')
 
-    tracksfile_string = '&' + '&'.join(['='.join(i) for i in parser.items('tracks')])
-    tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('visual_options')])
-#    tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('database')])
+    tracksfile_string = ''
+    if parser.items('tracks'): 
+        tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('tracks')])
+    if parser.items('visual_options'):
+        tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('visual_options')])
 
     tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[1] for x in parser.items("custom_tracks")])
 
