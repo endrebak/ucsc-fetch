@@ -4,3 +4,4 @@ params/tracks_options/ibe.txt
 params/regions/ibe.txt
 *.swp
 results/*.pdf
+mechanize/*
