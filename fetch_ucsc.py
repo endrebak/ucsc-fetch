@@ -224,6 +224,11 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, 
     """
     Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
     """
+    # wait interval between different searches. 
+    query_interval = int(browseroptions['query_interval'])
+    print "\nWaiting %s seconds between each query\n" % query_interval
+    time.sleep(query_interval)
+    
     target_url = browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on' + "&position=%s:%s-%s" % (chromosome, start ,end)
     print(target_url)
     br.open(target_url)
@@ -236,8 +241,6 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, 
     pdf_file = open("results/%s.pdf" % label, 'w')
     pdf_file.write(pdf_contents)
     pdf_file.close()
-    
-    time.sleep(1)
 
     return pdf_contents
 
