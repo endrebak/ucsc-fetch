@@ -102,10 +102,10 @@ def get_regions(regionsfile):
 
     ::
 
-        #label   chromosome  start   end    upstream    downstream
-        sampleregion    chr1    10000    20000  0   0
-        gene1   chr2    2000    3000    0   0
-        gene1_1000window   chr2    2000    3000    1000 1000
+        #label  organism    assembly   chromosome  start   end    upstream    downstream
+        sampleregion    human   hg18    chr1    10000    20000  0   0
+        gene1   chr2    human   hg18    2000    3000    0   0
+        gene1_1000window    human   hg18  chr2    2000    3000    1000 1000
 
     """
     regions = []
@@ -116,16 +116,16 @@ def get_regions(regionsfile):
             pass
         else:
             fields = line.split()
-            if len(fields) == 4:
-                (label, chromosome, start, end) = fields[0:4]
+            if len(fields) == 6:
+                (label, organism, assembly, chromosome, start, end) = fields[0:6]
                 description = ''
             else:
-                (label, chromosome, start, end, upstream, downstream) = fields[0:6]
+                (label, organism, assembly, chromosome, start, end, upstream, downstream) = fields[0:8]
                 start = str(int(start) - int(upstream))
                 end = str(int(end) + int(downstream))
             if not chromosome.startswith('chr'):
                 chromosome = 'chr' + chromosome
-            regions.append((label, chromosome, start, end))
+            regions.append((label, organism, assembly, chromosome, start, end))
 
     return regions
 
@@ -139,10 +139,6 @@ def get_tracks_options(tracksfile):
         [visual_options]
 
         [custom_tracs]
-
-        [database]
-        org=human
-        db=hg18
 
         [tracks]
         wgRna=hide
@@ -173,7 +169,7 @@ def get_tracks_options(tracksfile):
 
     tracksfile_string = '&' + '&'.join(['='.join(i) for i in parser.items('tracks')])
     tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('visual_options')])
-    tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('database')])
+#    tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('database')])
 
     tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[1] for x in parser.items("custom_tracks")])
 
@@ -220,7 +216,7 @@ def initialize_browser(browseroptions):
 
     return br
 
-def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, end, label):
+def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, organism, assembly, start, end, label):
     """
     Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
     """
@@ -229,7 +225,7 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, start, 
     print "\nWaiting %s seconds between each query\n" % query_interval
     time.sleep(query_interval)
     
-    target_url = browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on' + "&position=%s:%s-%s" % (chromosome, start ,end)
+    target_url = browseroptions['ucsc_base_url'] + '?' + tracksoptions_string + '&hgt.psOutput=on' + "&org=%s&db=%s" % (organism, assembly) + "&position=%s:%s-%s" % (chromosome, start ,end)
     print(target_url)
     br.open(target_url)
 
@@ -256,6 +252,6 @@ if __name__ == '__main__':
 
     regions = get_regions(options.regionsfile)
     for region in regions:
-        (label, chromosome, start, end) = region
-        response = get_screenshot(br, browseroptions, trackoptions_string, chromosome, start, end, label)
+        (label, organism, assembly, chromosome, start, end) = region
+        response = get_screenshot(br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
 #    main()
