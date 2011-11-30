@@ -45,11 +45,6 @@ Example:
 
     [visual_options]
 
-    [database]
-    org=Human
-    db=hg18
-    pix=1000
-
     [tracks]
     wgRna=hide
     wgEncodeReg=hide

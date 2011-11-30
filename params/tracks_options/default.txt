@@ -1,11 +1,6 @@
 [visual_options]
 
 
-[database]
-# database options. Which organism and assembly release do you want to use?
-org=Human
-db=hg18
-
 [custom_tracks]
 # URLs to Custom tracks.
 # note: only one URL will be shown. To upload multiple custom tracks, create an
