@@ -8,9 +8,8 @@ pix=1000
 
 [custom_tracks]
 # note: only one URL will be shown. To upload multiple custom tracks, create an
-# headers file as described in
-# http://genome.ucsc.edu/goldenPath/help/customTrack.html
-#track1 = http://genome.ucsc.edu/goldenPath/help/examples/ct_example8.txt
+# headers file as described http://genome.ucsc.edu/goldenPath/help/customTrack.html
+track1 = http://pastebin.com/raw.php?i=CKCuYGmX
 
 [tracks]
 wgRna=hide
