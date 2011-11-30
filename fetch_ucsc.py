@@ -138,6 +138,12 @@ def get_tracks_options(tracksfile):
 
         [visual_options]
 
+        [custom_tracs]
+
+        [database]
+        org=human
+        db=hg18
+
         [tracks]
         wgRna=hide
         cpgIslandExt=pack
@@ -168,6 +174,8 @@ def get_tracks_options(tracksfile):
     tracksfile_string = '&'.join(['='.join(i) for i in parser.items('tracks')])
     tracksfile_string += '&'.join(['='.join(i) for i in parser.items('visual_options')])
     tracksfile_string += '&'.join(['='.join(i) for i in parser.items('database')])
+
+    tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[1] for x in parser.items("custom_tracks")])
 
     return tracksfile_string
 
