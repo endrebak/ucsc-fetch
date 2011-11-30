@@ -56,11 +56,12 @@ def do_pdf_pages(filename, options):
         os.chdir(tdir)
         
         # work around for using Unicode filenames in Tex
-        os.link(filename, 'input.pdf')
+#        os.link(filename, 'input.pdf')
 
         pdfpages_options = dict( (k, bool_to_latex(v)) 
                 for (k, v) in options.__dict__.iteritems())
-        pdfpages_options['filename'] = 'input.pdf'
+#        pdfpages_options['filename'] = 'input.pdf'
+        pdfpages_options['filename'] = filename
         t = file('pdfpages.tex', 'w')
         t.write(TEMPLATE % pdfpages_options)
         t.close()
