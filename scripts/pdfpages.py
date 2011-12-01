@@ -22,6 +22,7 @@ TEMPLATE = r'''
 \includepdf[
     pages={%(pages)s},
     nup=%(nup)s,
+    delta=3 3,
     landscape=%(landscape)s,
     openright=%(open_right)s,
 ]{%(filename)s}
@@ -88,9 +89,9 @@ def main(args):
                     action='store_false', dest='landscape',
                     default=True,
                     help='print in portrait mode'),
-        optparse.Option('--open-left',
+        optparse.Option('--open-right',
                     action='store_false', dest='open_right',
-                    default=True,
+                    default=False,
                     help='insert blank page at start'),
         optparse.Option('--debug',
                     action='store', dest='debug',
