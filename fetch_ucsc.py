@@ -23,6 +23,7 @@ import ConfigParser
 import re
 import time
 import csv
+import os
 
 
 def get_options():
@@ -73,7 +74,7 @@ def get_browser_config(optionsfile):
     configparser.read(optionsfile)
 #    print(configparser.items("browser"))
 #    print configparser.options("browser")
-    browseroptions = dict(configparser.items("browser"))
+    browseroptions = dict(configparser.items("browser") + configparser.items("output"))
 
     if browseroptions['email'] == '':
         raise ConfigParser.Error('the email field is required. Please edit %s and add your email address' % optionsfile)
@@ -219,7 +220,7 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, organis
     """
     Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
     """
-    print "getting screenshot for %s" % label
+    print "\ngetting screenshot for %s" % label
     # wait interval between different searches. 
     query_interval = int(browseroptions['query_interval'])
     print "\nWaiting %s seconds between each query\n" % query_interval
@@ -233,8 +234,15 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, organis
     response = br.open(pdf_url)
     
     pdf_contents = response.read()
-
-    pdf_file = open("results/%s.pdf" % label, 'w')
+    
+    outputfolder = browseroptions['outputfolder']
+    if outputfolder == '':
+        outputfolder = 'results'
+    try:
+        os.makedirs(outputfolder)
+    except OSError:
+        pass
+    pdf_file = open('%s/%s.pdf' % (outputfolder, label), 'w')
     pdf_file.write(pdf_contents)
     pdf_file.close()
 
