@@ -9,4 +9,7 @@ INPUTFOLDER=$1
 OUTPUTFILE=$2
 
 echo pdftk ${INPUTFOLDER}/*.pdf cat output ${OUTPUTFILE}_tmp.pdf
+pdftk ${INPUTFOLDER}/*.pdf cat output ${OUTPUTFILE}_tmp.pdf
 echo python pdfpages.py ${OUTPUTFILE}_tmp.pdf -n2x2
+python pdfpages.py ${OUTPUTFILE}_tmp.pdf -n2x2
+mv ${OUTPUTFILE}-pdf-pages.pdf $2
