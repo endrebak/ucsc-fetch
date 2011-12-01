@@ -26,13 +26,13 @@ import csv
 
 
 def get_options():
-    parser = optparse.OptionParser()
+    parser = optparse.OptionParser(usage="usage: %prog -r <regions file> -t <tracks file> -b <browser config file>")
 
     parser.add_option('-r', '--regions', '--regions_file', '--region', dest='regionsfile',
             help='CSV file containing list of regions to analyze', default='')
     parser.add_option('-t', '--tracks', '--params', dest='tracksfile',
             help='file containing list of tracks to show, and other parameters', default='')
-    parser.add_option('-u', '--ucsc', '--ucsc_file', '--browser', '--config', '--browser_config', dest='browser_config_file',
+    parser.add_option('-u', '-b', '--ucsc', '--ucsc_file', '--browser', '--config', '--browser_config', dest='browser_config_file',
             help='file containing URL to the UCSC browser, and eventually username and password', default='params/browser_config/default.txt')
 
     (options, args) = parser.parse_args()
@@ -41,13 +41,10 @@ def get_options():
     # required options
     if options.regionsfile == '':
         parser.print_help()
-        print('fetch_ucsc.py: regions file not defined.')
-#        raise optparse.OptParseError('regions file missing')
-        sys.exit(1)
+        parser.error('fetch_ucsc.py: regions file not defined.')
     if options.tracksfile == '':
         parser.print_help()
-        print('fetch_ucsc.py: tracks not defined.')
-        sys.exit(1)
+        parser.error('fetch_ucsc.py: tracks not defined.')
 
     return (options, args)
 
