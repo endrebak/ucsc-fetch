@@ -12,6 +12,8 @@ Reference: http://biostar.stackexchange.com/questions/3121/genomic-cordinates-fr
 
 import subprocess
 import sys
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 # READING GENE LIST FILE
 try:
@@ -22,7 +24,7 @@ except:
     sys.exit("invalid file")
 
 genelist = genelist_h.read().split()
-print genelist
+logging.debug(genelist)
 
 
 
@@ -49,16 +51,16 @@ for line in temp_output_h:
     (gene, chrom, start, end) = line.split()
     start = int(start)
     end = int(end)
-    print start < end
+    logging.debug(start < end)
     if not all_genes.has_key(gene):
         all_genes[gene] = [gene, chrom, start, end]
     else:
         if start < all_genes[gene][2]:
-            print gene, "(start)", start, all_genes[gene][2]
+            logging.debug((gene, "(start)", start, all_genes[gene][2]))
             all_genes[gene][2] = start
 
         if end > all_genes[gene][3]:
-            print gene, "(end)", end, all_genes[gene][3]
+            logging.debug((gene, "(end)", end, all_genes[gene][3]))
             all_genes[gene][3] = end
 
 
