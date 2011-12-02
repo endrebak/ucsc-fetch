@@ -93,3 +93,13 @@ Example:
     httproxy_password =
 
 Look at params/browser_config/default.txt for an example Regions file.
+
+
+
+REQUISITES
+------------
+
+You will need:
+
+ * The python mechanize library http://wwwsearch.sourceforge.net/mechanize/
+ * For the reports, you will need a tool to convert Restructured Text to PDF , e.g. rst2pdf (http://code.google.com/p/rst2pdf/ )
