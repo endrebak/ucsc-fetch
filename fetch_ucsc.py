@@ -314,7 +314,7 @@ newpage
     report.close()
 
 #    print reportoutputfilename
-    subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-b 1', '-q'])
+    subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s ./scripts/simple.css', '-b 1', '-q'])
 
 
 #def main():
