@@ -336,7 +336,7 @@ if __name__ == '__main__':
             options.tracksfile.rsplit('/', 1)[-1].split('.')[0])
 
     print "\n\nStoring report at %s.pdf\n\n" % reportfilename
-    write_report(regions, reportfilename, (2,2))
+    write_report(regions, reportfilename, (2,3))
 
 
 #    main()
