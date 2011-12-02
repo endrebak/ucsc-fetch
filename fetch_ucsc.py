@@ -24,6 +24,7 @@ import re
 import time
 import csv
 import os
+import subprocess
 
 
 def get_options():
@@ -37,6 +38,8 @@ def get_options():
             help='file containing URL to the UCSC browser, and eventually username and password', default='params/browser_config/default.txt')
     parser.add_option('-o', '-f', '--output', '--output-folder', '--folder', dest='outputfolder',
             help='output folder (default=results)', default='results/')
+    parser.add_option('-s', '--skip-existing', '-e', '--skip-downloaded', dest='skip_existing', action='store_true',
+            help='Skip downloading files that already exist. Useful if you have already downloaded some regions, and want to avoit downloading them again.', default=False)
     (options, args) = parser.parse_args()
 
 #    print options.inputfile
@@ -225,33 +228,38 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
     """
     Note: to manually get a screenshot from UCSC, just add &hgt.psOutput=on to the URL, and then download the third link
     """
-    print "\ngetting screenshot for %s" % label
-    # wait interval between different searches. 
-    query_interval = int(browseroptions['query_interval'])
-    print "\nWaiting %s seconds between each query\n" % query_interval
-    time.sleep(query_interval)
     
-    target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
-    print(target_url)
-    br.open(target_url)
+    outputfilename = "%s/%s.pdf" % (options.outputfolder, label)
+    if options.skip_existing and os.path.exists(outputfilename):
+        print "Output file %s already exists, and skip_existing is true. So I am not downloading this file." % (outputfilename)
+    else:
+        print "\ngetting screenshot for %s" % label
+        # wait interval between different searches. 
+        query_interval = int(browseroptions['query_interval'])
+        print "\nWaiting %s seconds between each query\n" % query_interval
+        time.sleep(query_interval)
+        
+        target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
+        print(target_url)
+        br.open(target_url)
 
-    pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
-    response = br.open(pdf_url)
-    
-    pdf_contents = response.read()
-    
-    outputfolder = options.outputfolder
-    if outputfolder == '':
-        outputfolder = 'results'
-    try:
-        os.makedirs(outputfolder)
-    except OSError:
-        pass
-    pdf_file = open('%s/%s.pdf' % (outputfolder, label), 'w')
-    pdf_file.write(pdf_contents)
-    pdf_file.close()
+        pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
+        response = br.open(pdf_url)
+        
+        pdf_contents = response.read()
+        
+        outputfolder = options.outputfolder
+        if outputfolder == '':
+            outputfolder = 'results'
+        try:
+            os.makedirs(outputfolder)
+        except OSError:
+            pass
+        pdf_file = open('%s/%s.pdf' % (outputfolder, label), 'w')
+        pdf_file.write(pdf_contents)
+        pdf_file.close()
 
-    return pdf_contents
+    return 
 
 def write_report(regions, reportoutputfilename, layout):
     """use RestructuredText to write a multi-page report
@@ -281,7 +289,6 @@ def write_report(regions, reportoutputfilename, layout):
 newpage
 =======
 
-::
     .. csv-table::
 '''
     report_text = newpage_template
@@ -301,10 +308,13 @@ newpage
         if lastline != True:
             report_text += '\n\n' + newpage_template
 
-    print report_text
-    report = open(reportoutputfilename, 'w')
+#    print report_text
+    report = open(reportoutputfilename + '.rst', 'w')
     report.write(report_text)
     report.close()
+
+#    print reportoutputfilename
+    subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-b 1', '-q'])
 
 
 #def main():
@@ -319,6 +329,14 @@ if __name__ == '__main__':
     regions = get_regions(options.regionsfile)
     for region in regions:
         (label, organism, assembly, chromosome, start, end) = region
-#        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
-    write_report(regions, "reports/all.rst", (2,2))
+        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+
+    reportfilename = "reports/%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
+            options.browser_config_file.rsplit('/', 1)[-1].split('.')[0],
+            options.tracksfile.rsplit('/', 1)[-1].split('.')[0])
+
+    print "\n\nStoring report at %s.pdf\n\n" % reportfilename
+    write_report(regions, reportfilename, (2,2))
+
+
 #    main()
