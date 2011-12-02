@@ -27,7 +27,7 @@ import os
 
 
 def get_options():
-    parser = optparse.OptionParser(usage="usage: %prog -r <regions file> -t <tracks file> -b <browser config file>")
+    parser = optparse.OptionParser(usage="usage: %prog -r <regions file> -t <tracks file> -b <browser config file> [-o <output folxder>]")
 
     parser.add_option('-r', '--regions', '--regions_file', '--region', dest='regionsfile',
             help='CSV file containing list of regions to analyze', default='')
@@ -35,7 +35,8 @@ def get_options():
             help='file containing list of tracks to show, and other parameters', default='')
     parser.add_option('-u', '-b', '--ucsc', '--ucsc_file', '--browser', '--config', '--browser_config', dest='browser_config_file',
             help='file containing URL to the UCSC browser, and eventually username and password', default='params/browser_config/default.txt')
-
+    parser.add_option('-o', '-f', '--output', '--output-folder', '--folder', dest='outputfolder',
+            help='output folder (default=results)', default='results/')
     (options, args) = parser.parse_args()
 
 #    print options.inputfile
@@ -74,7 +75,8 @@ def get_browser_config(optionsfile):
     configparser.read(optionsfile)
 #    print(configparser.items("browser"))
 #    print configparser.options("browser")
-    browseroptions = dict(configparser.items("browser") + configparser.items("output"))
+#    browseroptions = dict(configparser.items("browser") + configparser.items("output"))
+    browseroptions = dict(configparser.items("browser"))
 
     if browseroptions['email'] == '':
         raise ConfigParser.Error('the email field is required. Please edit %s and add your email address' % optionsfile)
@@ -134,9 +136,12 @@ def get_tracks_options(tracksfile):
 
     Example Tracks file:
 
+    ::
+
         [visual_options]
 
-        [custom_tracs]
+        [custom_tracks]
+        mycustomtrack = http://url_to_track
 
         [tracks]
         wgRna=hide
@@ -216,9 +221,9 @@ def initialize_browser(browseroptions):
 
     return br
 
-def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, organism, assembly, start, end, label):
+def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome, organism, assembly, start, end, label):
     """
-    Note: to get the screenshot, add &hgt.psOutput=on to the URL, and then download the third link
+    Note: to manually get a screenshot from UCSC, just add &hgt.psOutput=on to the URL, and then download the third link
     """
     print "\ngetting screenshot for %s" % label
     # wait interval between different searches. 
@@ -235,7 +240,7 @@ def get_screenshot(br, browseroptions, tracksoptions_string, chromosome, organis
     
     pdf_contents = response.read()
     
-    outputfolder = browseroptions['outputfolder']
+    outputfolder = options.outputfolder
     if outputfolder == '':
         outputfolder = 'results'
     try:
@@ -261,5 +266,5 @@ if __name__ == '__main__':
     regions = get_regions(options.regionsfile)
     for region in regions:
         (label, organism, assembly, chromosome, start, end) = region
-        response = get_screenshot(br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
 #    main()

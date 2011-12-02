@@ -9,7 +9,7 @@ A script to fetch screenshots from the UCSC browser
 Usage:
 ++++++
 
-    $: python fetch_ucsc.py --regions <regions file> --tracks <tracks file> --browser_config <browser config file>
+    $: python fetch_ucsc.py --regions <regions file> --tracks <tracks file> --browser_config <browser config file> [--output-folder <output folder>]
 
 In order to use this script, you need to edit and customize three files: the
 Regions file, the Tracks file, and the Browser config file. Most of these have

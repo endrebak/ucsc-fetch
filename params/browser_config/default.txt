@@ -27,6 +27,6 @@ httproxy_port =
 httproxy_password =
 
 
-[output]
-# Define where to save the output
-outputfolder=results/
+#[output]
+## Define where to save the output
+#outputfolder=results/
