@@ -168,7 +168,7 @@ def get_tracks_options(tracksfile):
 
     parser.read(tracksfile)
 #    parser.items("tracks")
-    print parser.items('tracks')
+#    print parser.items('tracks')
 
     tracksfile_string = ''
     if parser.items('tracks'): 
@@ -253,12 +253,51 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
 
     return pdf_contents
 
+def write_report(regions, reportoutputfilename, layout):
+    """use RestructuredText to write a multi-page report
+
+
+    Inputs:
+
+    * pdf_files -> the pdfs to be arranged
+    * reportoutputfilename -> where to store the report
+    * layout -> 2-elements tuple containing x and y per page (e.g. (2, 2))
+
+    Example Output (use rst2pdf to convert to pdf):
+    
+    ::
+
+        .. csv-table::
+    
+            results/gene1.pdf , results/gene2.pdf
+            results/gene3.pdf , results/gene4.pdf
+            results/gene5.pdf , results/gene6.pdf
+        
+        (layout is (2, 3))
+
+    """
+#    print regions
+
+    pdfs = sorted([region[0] + '.pdf' for region in regions], reverse=True)
+    print pdfs
+
+    while pdfs:
+        for y in xrange(layout[1]):
+#            print [pdfs.pop() for x in xrange(layout[0])]
+            print
+            for x in xrange(layout[0]):
+                try:
+                    print pdfs.pop(),
+                except IndexError:
+                    pass
+        print "\nendpage",
+
 
 #def main():
 if __name__ == '__main__':
     (options, args) = get_options()
     browseroptions = get_browser_config(options.browser_config_file)
-    print browseroptions
+#    print browseroptions
     br = initialize_browser(browseroptions)
 
     trackoptions_string = get_tracks_options(options.tracksfile)
@@ -266,5 +305,6 @@ if __name__ == '__main__':
     regions = get_regions(options.regionsfile)
     for region in regions:
         (label, organism, assembly, chromosome, start, end) = region
-        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+#        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+    write_report(regions, "reports/all.pdf", (3,2))
 #    main()
