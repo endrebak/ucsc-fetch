@@ -1,4 +1,4 @@
 #label	chromosome	start	end	upstream	downstream
 DPM1    human   hg18	20	48984812    49008467	0	0
 DPM1_100kwindow human   hg18	20	48984812    49008467	100000	100000
-ALG1    chr16   human   hg18   5061821 5075589 10000   10000
+ALG1    human   hg18   chr16    5061821 5075589 10000   10000
