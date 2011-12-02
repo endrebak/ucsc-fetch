@@ -276,21 +276,35 @@ def write_report(regions, reportoutputfilename, layout):
         (layout is (2, 3))
 
     """
-#    print regions
+    pdfs = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
+    newpage_template = '''=======
+newpage
+=======
 
-    pdfs = sorted([region[0] + '.pdf' for region in regions], reverse=True)
-    print pdfs
+::
+    .. csv-table::
+'''
+    report_text = newpage_template
+    lastline = False
 
     while pdfs:
         for y in xrange(layout[1]):
-#            print [pdfs.pop() for x in xrange(layout[0])]
-            print
+            report_text += '\n\t'
+            thisline_pdfs = []
             for x in xrange(layout[0]):
                 try:
-                    print pdfs.pop(),
+                    thisline_pdfs.append(pdfs.pop())
                 except IndexError:
+                    lastline = True
                     pass
-        print "\nendpage",
+            report_text += ' , '.join(thisline_pdfs) 
+        if lastline != True:
+            report_text += '\n\n' + newpage_template
+
+    print report_text
+    report = open(reportoutputfilename, 'w')
+    report.write(report_text)
+    report.close()
 
 
 #def main():
@@ -306,5 +320,5 @@ if __name__ == '__main__':
     for region in regions:
         (label, organism, assembly, chromosome, start, end) = region
 #        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
-    write_report(regions, "reports/all.pdf", (3,2))
+    write_report(regions, "reports/all.rst", (2,2))
 #    main()
