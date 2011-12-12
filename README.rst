@@ -24,12 +24,8 @@ one per line. The script will generate a separate .pdf file for each entry in th
 
 Example:
 
-::
-  
-    #label  organism    assembly   chromosome  start end  upstream    downstream
-    DPM2    human   hg18    9   130697374   130700763   0   0
-    DPM1    human   hg18    20  49551405    49575060    0   0
-    DPAGT1  human   hg18  11  118967214  118972785    0   0
+    .. include:: params/regions/default.txt
+        :literal: 
 
 Look at params/regions/default.txt for an example Regions file.
 
@@ -41,25 +37,8 @@ database and organism to use. For each entry in the Regions file, the script wil
 
 Example:
 
-::
-
-    [visual_options]
-
-    [tracks]
-    wgRna=hide
-    wgEncodeReg=hide
-    cpgIslandExt=hide
-    ensGene=hide
-    mrna=hide
-    intronEst=hide
-    mgcGenes=hide
-    cons44way=hide
-    snp130=hide
-    snpArray=hide
-    refGene=hide
-    knownGene=hide
-    rmsk=hide
-    phyloP46wayPlacental=hide
+    .. include:: params/tracks_options/default.txt
+        :literal: 
 
 Look at params/tracks_options/default.txt for an example Regions file.
 
@@ -79,18 +58,8 @@ queries, as this may create problems to other users of the UCSC browser.
 
 Example: 
 
-::
-
-    [browser]
-    ucsc_base_url = http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18
-    username =
-    password =
-    user-agent = Mechanize client to get screenshots from the UCSC browser. Home
-    page: https://bitbucket.org/dalloliogm/ucsc-fetch
-    email = 
-    httpproxy = 
-    httproxy_port =
-    httproxy_password =
+    .. include:: params/browser_config/default.txt
+        :literal: 
 
 Look at params/browser_config/default.txt for an example Regions file.
 
