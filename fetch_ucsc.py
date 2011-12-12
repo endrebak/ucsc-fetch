@@ -322,7 +322,8 @@ newpage
     report.close()
 
 #    print reportoutputfilename
-    subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s ./scripts/simple.css', '-b 1', '-q'])
+    # rst2pdf options: -s (apply stylesheet), -b 1 (break pages), -q (quiet execution)
+    subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q'])
 
 
 #def main():

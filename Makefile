@@ -1,9 +1,8 @@
 test:
 	ipython fetch_ucsc.py -- -r params/regions/default.txt -t params/tracks_options/default.txt -u params/browser_config/default.txt
 
-
 ibe:
-	ipython fetch_ucsc.py -- -r params/regions/ibe.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
+	ipython fetch_ucsc.py -- -s -l2x2 -r params/regions/ibe.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
 
 results/chr1.pdf: params/tracks_options/ibe.txt params/regions/all_chromosomes_hg18.txt
 	python fetch_ucsc.py -r params/regions/all_chromosomes_hg18.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
