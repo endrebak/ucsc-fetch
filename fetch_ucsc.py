@@ -232,6 +232,8 @@ def initialize_browser(browseroptions):
 
 def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome, organism, assembly, start, end, label):
     """
+    Get a screenshot from a UCSC browser installation. 
+
     Note: to manually get a screenshot from UCSC, just add &hgt.psOutput=on to the URL, and then download the third link
     """
     
