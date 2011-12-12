@@ -39,7 +39,8 @@ def get_options():
     parser.add_option('-o', '-f', '--output', '--output-folder', '--folder', dest='outputfolder',
             help='output folder (default=results)', default='results/')
     parser.add_option('-s', '--skip-existing', '-e', '--skip-downloaded', dest='skip_existing', action='store_true',
-            help='Skip downloading files that already exist. Useful if you have already downloaded some regions, and want to avoit downloading them again.', default=False)
+            help='Skip downloading UCSC screenshots that have already been downloaded. Useful for debugging purposes, or if you need to add a region to list of regions that you have already downloaded in a previous run.', 
+            default=False)
     parser.add_option('-l', '--layout', dest='layout', 
             help='Output layout: how to dispose multiple screenshots in a single page. must be a string in the format "numberxnumber", e.g. 3x2, where 3 is the number of rows, and 2 is the number of columns',
             default='2x2')
@@ -106,8 +107,7 @@ def get_regions(regionsfile):
         gene1   chr2    2000    3000
 
     Optionally, the region files can contain two additional columns: upstream and downstream.
-    These parameters can be used to zoom out of the region. It is useful if you have a set of gene coordinates, and don't want to calculate an upstream and downstream margins manually.
-
+    These two parameters can be used to zoom out of the region. It is useful if you have a set of gene coordinates, and want to include some margins without having to calculate them manually.
 
     ::
 
@@ -279,7 +279,7 @@ def write_report(regions, reportoutputfilename, layout):
     * reportoutputfilename -> where to store the report
     * layout -> 2-elements tuple containing x and y per page (e.g. (2, 2))
 
-    Example Output (use rst2pdf to convert to pdf):
+    Example Output (if installed, rst2pdf is used to convert to pdf):
     
     ::
 
