@@ -1,5 +1,5 @@
 test:
-	ipython fetch_ucsc.py -- -r params/regions/default.txt -t params/tracks_options/default.txt -u params/browser_config/default.txt
+	python fetch_ucsc.py -r params/regions/default.txt -t params/tracks_options/default.txt -u params/browser_config/default.txt
 
 ibe:
 	ipython fetch_ucsc.py -- -s -l2x2 -r params/regions/ibe.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
