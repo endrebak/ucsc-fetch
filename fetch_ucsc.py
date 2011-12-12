@@ -345,7 +345,8 @@ if __name__ == '__main__':
             options.tracksfile.rsplit('/', 1)[-1].split('.')[0])
 
     print "\n\nStoring report at %s.pdf\n\n" % reportfilename
-    write_report(regions, reportfilename, (2,3))
+    layout = [int(x) for x in options.layout.split('x')]
+    write_report(regions, reportfilename, layout)
 
 
 #    main()
