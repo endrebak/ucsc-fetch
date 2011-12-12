@@ -40,6 +40,9 @@ def get_options():
             help='output folder (default=results)', default='results/')
     parser.add_option('-s', '--skip-existing', '-e', '--skip-downloaded', dest='skip_existing', action='store_true',
             help='Skip downloading files that already exist. Useful if you have already downloaded some regions, and want to avoit downloading them again.', default=False)
+    parser.add_option('-l', '--layout', dest='layout', 
+            help='Output layout: how to dispose multiple screenshots in a single page. must be a string in the format "numberxnumber", e.g. 3x2, where 3 is the number of rows, and 2 is the number of columns',
+            default='2x2')
     (options, args) = parser.parse_args()
 
 #    print options.inputfile
@@ -50,6 +53,9 @@ def get_options():
     if options.tracksfile == '':
         parser.print_help()
         parser.error('fetch_ucsc.py: tracks not defined.')
+    if not re.match('^\d+x\d+$', options.layout):
+        parser.print_help()
+        parser.error('fetch_ucsc.py: incorrect layout')
 
     return (options, args)
 
