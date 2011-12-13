@@ -422,7 +422,10 @@
       alignment: TA_CENTER
       commands: []
              [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
-             [INNERGRID, [ 0, 0 ], [ -1, -1 ], 0.25, black ]
+             # File "/usr/lib/python2.6/dist-packages/reportlab/platypus/tables.py", line 989, in _drawLines
+             #  op, [startcolumn,startrow], [endcolumn,endrow], weight, color
+             [INNERGRID, [ 0, -1], [ -1, 1 ], 0.25, black ]
+             [ROWBACKGROUNDS, [0, 0], [-1, -1], [white]]
              [BOX, [ 0, 0 ], [ -1, -1 ], 0.25, black ]
 
     table-title:
@@ -439,6 +442,8 @@
 
     table-body:
       parent : normal
+      alignment : TA_CENTER
+      fontSize : 8
 
     dedication:
       parent : normal
