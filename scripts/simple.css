@@ -109,6 +109,8 @@
 
     title_reference:
       parent: normal
+      spaceBefore: 6
+      spaceAfter: 1
       fontName: stdItalic
 
     bodytext:
@@ -282,11 +284,11 @@
 
     title:
       parent: heading
-      fontName: stdBold
-      fontSize: 200%
+#      fontName: stdBold
+      fontSize: 80%
       alignment: TA_CENTER
       keepWithNext: false
-      spaceAfter: 10
+      spaceAfter: 1
 
     subtitle:
       parent: title
@@ -295,8 +297,8 @@
 
     heading1:
       parent: heading
-      fontName: stdBold
-      fontSize: 105%
+#      fontName: stdBold
+      fontSize: 65%
       alignment: TA_CENTER
 
     heading2:
@@ -420,7 +422,7 @@
       parent: literal
 
     table:
-      spaceBefore:6
+      spaceBefore:2
       spaceAfter:0
       alignment: TA_CENTER
       commands: []
@@ -447,6 +449,7 @@
       parent : normal
       alignment : TA_CENTER
       fontSize : 8
+      valign : BOTTOM
 
     dedication:
       parent : normal
