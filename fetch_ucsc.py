@@ -25,6 +25,7 @@ import time
 import csv
 import os
 import subprocess
+import logging
 
 
 def get_options():
@@ -44,7 +45,13 @@ def get_options():
     parser.add_option('-l', '--layout', dest='layout', 
             help='Output layout: how to dispose multiple screenshots in a single page. must be a string in the format "numberxnumber", e.g. 3x2, where 3 is the number of rows, and 2 is the number of columns',
             default='2x2')
+    parser.add_option('-d', '--debug', dest='debug', action='store_true',
+            help='set debug mode on', default=False)
     (options, args) = parser.parse_args()
+    
+    if options.debug is True:
+        logging.basicConfig(format='%(levelname)s:%(pathname)s (line %(lineno)s): %(message)s', level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG)
 
 #    print options.inputfile
     # required options
@@ -126,12 +133,12 @@ def get_regions(regionsfile):
 
     for fields in scanner:
         if fields == []:
-            print "no fields"
+            logging.debug("no fields")
             continue
         if fields[0].startswith('#'):
-            print "comment"
+            logging.debug("comment")
             continue
-        print fields
+        logging.debug(fields)
         if len(fields) == 6:
             (label, organism, assembly, chromosome, start, end) = fields[0:6]
             description = ''
