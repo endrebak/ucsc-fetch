@@ -1,7 +1,7 @@
-#label	chromosome	start	end	upstream	downstream
-COX2    human   hg18    chr17   13913444    14052721    10000   10000
-OXTR    human   hg18    chr3    8767095 8786300 10000   10000
-DPM1    human   hg18	20	48984812    49008467	0	0
-DPM1_100kwindow human   hg18	20	48984812    49008467	100000	100000
-ALG1    human   hg18   chr16    5061821 5075589 10000   10000
-IL10    human   hg18    chr1    205007571   205012462   10000   1000
+#label, chromosome, start, end, upstream, downstream
+COX2, human, hg18, chr17, 13913444, 14052721, 10000, 10000
+OXTR, human, hg18, chr3, 8767095, 8786300, 10000, 10000
+DPM1, human, hg18, 20, 48984812, 49008467, 0, 0
+DPM1_100kwindow, human, hg18, 20, 48984812, 49008467, 100000, 100000
+ALG1, human, hg18, chr16, 5061821, 5075589, 10000, 10000
+IL10, human, hg18, chr1, 205007571, 205012462, 10000, 1000

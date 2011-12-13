@@ -102,42 +102,46 @@ def get_regions(regionsfile):
 
     :: 
 
-        #label   chromosome  start   end
-        sampleregion    chr1    10000    20000
-        gene1   chr2    2000    3000
+        #label, chromosome, start, end
+        sampleregion, chr1, 10000, 20000
+        gene1, chr2, 2000, 3000
 
     Optionally, the region files can contain two additional columns: upstream and downstream.
     These two parameters can be used to zoom out of the region. It is useful if you have a set of gene coordinates, and want to include some margins without having to calculate them manually.
 
     ::
 
-        #label  organism    assembly   chromosome  start   end    upstream    downstream
-        sampleregion    human   hg18    chr1    10000    20000  0   0
-        gene1   chr2    human   hg18    2000    3000    0   0
-        gene1_1000window    human   hg18  chr2    2000    3000    1000 1000
+        #label, organism, assembly, chromosome, start, end, upstream, downstream
+        sampleregion, human, hg18, chr1, 10000, 20000, 0, 0
+        gene1, chr2, human, hg18, 2000, 3000, 0, 0
+        gene1_1000window, human, hg18, chr2, 2000, 3000, 1000, 1000
 
     """
     regions = []
 
+    
     regionsfile_contents = open(regionsfile, 'r')
-    for line in regionsfile_contents:
-        line = line.strip()
-        if line:
-            if line.startswith('#'):
-                pass
-            else:
-                print line
-                fields = line.split()
-                if len(fields) == 6:
-                    (label, organism, assembly, chromosome, start, end) = fields[0:6]
-                    description = ''
-                else:
-                    (label, organism, assembly, chromosome, start, end, upstream, downstream) = fields[0:8]
-                    start = str(int(start) - int(upstream))
-                    end = str(int(end) + int(downstream))
-                if not chromosome.startswith('chr'):
-                    chromosome = 'chr' + chromosome
-                regions.append((label, organism, assembly, chromosome, start, end))
+
+    scanner = csv.reader(regionsfile_contents, delimiter=',', skipinitialspace=True)
+
+    for fields in scanner:
+        if fields == []:
+            print "no fields"
+            continue
+        if fields[0].startswith('#'):
+            print "comment"
+            continue
+        print fields
+        if len(fields) == 6:
+            (label, organism, assembly, chromosome, start, end) = fields[0:6]
+            description = ''
+        else:
+            (label, organism, assembly, chromosome, start, end, upstream, downstream) = fields[0:8]
+            start = str(int(start) - int(upstream))
+            end = str(int(end) + int(downstream))
+        if not chromosome.startswith('chr'):
+            chromosome = 'chr' + chromosome
+        regions.append((label, organism, assembly, chromosome, start, end))
 
     return regions
 
