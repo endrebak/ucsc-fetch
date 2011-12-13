@@ -329,11 +329,14 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
                     current_regions.append(regions.pop())
                 except:
                     lastline = True
-                    pass
+                    print "raised Index Error", current_regions
+            print current_regions
             report_text += ' , '.join(current_regions) + '\n\t'
             report_text += ' , '.join(['.. image:: ../results/' + region + '.pdf' for region in current_regions])
-        if lastline != True:
-            current_page += 1
+#        if lastline is not True:
+        print "lastline", lastline
+        current_page += 1
+        if regions != []:
             report_text += '\n\n' + newpage_template % (reportoutputfilename.rsplit('/')[1], current_page)
 
 #    print report_text

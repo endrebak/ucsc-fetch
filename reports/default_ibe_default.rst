@@ -8,11 +8,14 @@ default_ibe_default, page 1
 	.. image:: ../results/ALG1.pdf , .. image:: ../results/COX2.pdf
 	DPM1 , DPM1_100kwindow
 	.. image:: ../results/DPM1.pdf , .. image:: ../results/DPM1_100kwindow.pdf
-	IL10 , OXTR
-	.. image:: ../results/IL10.pdf , .. image:: ../results/OXTR.pdf
 
 ======================================================================================================
 default_ibe_default, page 2
 ======================================================================================================
 
     .. csv-table::
+
+	IL10 , OXTR
+	.. image:: ../results/IL10.pdf , .. image:: ../results/OXTR.pdf
+	
+	
