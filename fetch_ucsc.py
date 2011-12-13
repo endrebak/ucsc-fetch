@@ -113,15 +113,16 @@ def get_regions(regionsfile):
         sampleregion, chr1, 10000, 20000
         gene1, chr2, 2000, 3000
 
-    Optionally, the region files can contain two additional columns: upstream and downstream.
-    These two parameters can be used to zoom out of the region. It is useful if you have a set of gene coordinates, and want to include some margins without having to calculate them manually.
+    Optionally, the region files can contain three additional columns: description, upstream and downstream.
+    The description is a short text used in the multi-page report to describe information about the region. It must be delimited by double quotes (")
+    The last two parameters, upstream and downstream, can be used to zoom out of the region. It is useful if you have a set of gene coordinates, and want to include some margins without having to calculate them manually.
 
     ::
 
-        #label, organism, assembly, chromosome, start, end, upstream, downstream
-        sampleregion, human, hg18, chr1, 10000, 20000, 0, 0
-        gene1, chr2, human, hg18, 2000, 3000, 0, 0
-        gene1_1000window, human, hg18, chr2, 2000, 3000, 1000, 1000
+        #label, organism, assembly, chromosome, start, end, description, upstream, downstream
+        sampleregion, human, hg18, chr1, 10000, 20000, "an example region", 0, 0
+        gene1, chr2, human, hg18, 2000, 3000, "my favorite gene", 0, 0
+        gene1_1000window, human, hg18, chr2, 2000, 3000, "my favorite gene with a 1k zoom out", 1000, 1000
 
     """
     regions = []
@@ -139,16 +140,19 @@ def get_regions(regionsfile):
             logging.debug("comment")
             continue
         logging.debug(fields)
-        if len(fields) == 6:
-            (label, organism, assembly, chromosome, start, end) = fields[0:6]
-            description = ''
-        else:
-            (label, organism, assembly, chromosome, start, end, upstream, downstream) = fields[0:8]
-            start = str(int(start) - int(upstream))
-            end = str(int(end) + int(downstream))
+        description = ''
+        upstream = downstream = 0
+        (label, organism, assembly, chromosome, start, end) = fields[0:6]
+        if len(fields) > 6:
+            description = fields[6]
+        if len(fields) > 7:
+            upstream = int(fields[7])
+        if len(fields) > 8:
+            downstream = int(fields[8])
+
         if not chromosome.startswith('chr'):
             chromosome = 'chr' + chromosome
-        regions.append((label, organism, assembly, chromosome, start, end))
+        regions.append((label, organism, assembly, chromosome, start, end, description))
 
     return regions
 
@@ -321,14 +325,19 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
 
     """
 #    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
+    print regions
     if sort_regions:
-        regions = sorted([region[0] for region in regions], reverse=True)
+        regions = sorted(regions, reverse=True, key=lambda x:x[0])
+    else: 
+        regions.reverse()
+    print regions
 
     newpage_template = '''======================================================================================================
 %s, page %s
 ======================================================================================================
 
     .. csv-table::
+        :delim: |
 '''
     report_text = newpage_template % (reportoutputfilename.rsplit('/')[1], 1)
     lastline = False
@@ -345,8 +354,8 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
                     lastline = True
 #                    print "raised Index Error", current_regions
 #            print current_regions
-            report_text += ' , '.join(current_regions) + '\n\t'
-            report_text += ' , '.join(['.. image:: ../results/' + region + '.pdf' for region in current_regions])
+            report_text += ' | '.join(['%s (%s)' % (region[0], region[-1]) for region in current_regions]) + '\n\t'
+            report_text += ' | '.join(['.. image:: ../results/' + region[0] + '.pdf' for region in current_regions])
 #        if lastline is not True:
 #        print "lastline", lastline
         current_page += 1
@@ -374,7 +383,7 @@ if __name__ == '__main__':
 
     regions = get_regions(options.regionsfile)
     for region in regions:
-        (label, organism, assembly, chromosome, start, end) = region
+        (label, organism, assembly, chromosome, start, end, description) = region
         response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
 
     reportfilename = "reports/%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
