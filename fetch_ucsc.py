@@ -269,15 +269,16 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
 
     return 
 
-def write_report(regions, reportoutputfilename, layout):
+def write_report(regions, reportoutputfilename, layout, sort_regions=True):
     """use RestructuredText to write a multi-page report
 
 
     Inputs:
 
-    * pdf_files -> the pdfs to be arranged
+    * regions -> the regions to be arranged
     * reportoutputfilename -> where to store the report
     * layout -> 2-elements tuple containing x and y per page (e.g. (2, 2))
+    * [sort_regions] -> do you want regions to be sorted alphabetically?
 
     Example Output (if installed, rst2pdf is used to convert to pdf):
     
@@ -305,8 +306,10 @@ def write_report(regions, reportoutputfilename, layout):
         (layout is (2, 3))
 
     """
-#    pdfs = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
-    pdfs = sorted([region[0] for region in regions], reverse=True)
+#    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
+    if sort_regions:
+        regions = sorted([region[0] for region in regions], reverse=True)
+
     newpage_template = '''======================================================================================================
 %s, page %s
 ======================================================================================================
@@ -317,15 +320,14 @@ def write_report(regions, reportoutputfilename, layout):
     lastline = False
     current_page = 1
 
-    while pdfs:
+    while regions:
         for y in xrange(layout[1]):
             report_text += '\n\t'
             current_regions = []
             for x in xrange(layout[0]):
                 try:
-                    current_regions.append(pdfs.pop())
-                    print current_regions
-                except IndexError:
+                    current_regions.append(regions.pop())
+                except:
                     lastline = True
                     pass
             report_text += ' , '.join(current_regions) + '\n\t'
