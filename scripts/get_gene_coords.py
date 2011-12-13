@@ -68,7 +68,7 @@ for line in temp_output_h:
 # PRINTING OUTPUT
 
 for (gene, values) in all_genes.items():
-    print "%s\tHuman\thg18\t%s\t%s\t%s\t10000\t10000" % tuple(values)
+    print '%s,Human,hg18,%s,%s,%s,"",10000,10000' % tuple(values)
 
 
 
