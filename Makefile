@@ -2,6 +2,8 @@ test:
 	python fetch_ucsc.py -r params/regions/default.txt -t params/tracks_options/default.txt -u params/browser_config/default.txt
 
 # NOTE: the following uses a custom browser configuration file that is not included in the repository. This is how I debug the script from my personal computer; but if you want to use these scripts you should define your own email address in a browser_config file.
+example1:
+	python fetch_ucsc.py -r params/regions/example1.txt -t params/tracks_options/default.txt -u params/browser_config/example_config.txt -s -l 2x5
 ibe:
 	ipython fetch_ucsc.py -- -s -l2x2 -r params/regions/ibe.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
 
