@@ -130,6 +130,8 @@
     line:
       parent: lineblock
       spaceBefore: 0
+      fontSize : 2
+      size : 2
 
     toc1:
       parent: toc
@@ -424,9 +426,9 @@
              [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
              # File "/usr/lib/python2.6/dist-packages/reportlab/platypus/tables.py", line 989, in _drawLines
              #  op, [startcolumn,startrow], [endcolumn,endrow], weight, color
-             [INNERGRID, [ 0, -1], [ -1, 1 ], 0.25, black ]
+             [INNERGRID, [ 0, -1], [ -1, -1 ], 0.25, white ]
              [ROWBACKGROUNDS, [0, 0], [-1, -1], [white]]
-             [BOX, [ 0, 0 ], [ -1, -1 ], 0.25, black ]
+             [BOX, [ 0, -1 ], [ 0, -1 ], 0.25, white ]
 
     table-title:
       parent : heading4
