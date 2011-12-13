@@ -121,20 +121,23 @@ def get_regions(regionsfile):
 
     regionsfile_contents = open(regionsfile, 'r')
     for line in regionsfile_contents:
-        if line.startswith('#'):
-            pass
-        else:
-            fields = line.split()
-            if len(fields) == 6:
-                (label, organism, assembly, chromosome, start, end) = fields[0:6]
-                description = ''
+        line = line.strip()
+        if line:
+            if line.startswith('#'):
+                pass
             else:
-                (label, organism, assembly, chromosome, start, end, upstream, downstream) = fields[0:8]
-                start = str(int(start) - int(upstream))
-                end = str(int(end) + int(downstream))
-            if not chromosome.startswith('chr'):
-                chromosome = 'chr' + chromosome
-            regions.append((label, organism, assembly, chromosome, start, end))
+                print line
+                fields = line.split()
+                if len(fields) == 6:
+                    (label, organism, assembly, chromosome, start, end) = fields[0:6]
+                    description = ''
+                else:
+                    (label, organism, assembly, chromosome, start, end, upstream, downstream) = fields[0:8]
+                    start = str(int(start) - int(upstream))
+                    end = str(int(end) + int(downstream))
+                if not chromosome.startswith('chr'):
+                    chromosome = 'chr' + chromosome
+                regions.append((label, organism, assembly, chromosome, start, end))
 
     return regions
 
@@ -329,12 +332,12 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
                     current_regions.append(regions.pop())
                 except:
                     lastline = True
-                    print "raised Index Error", current_regions
-            print current_regions
+#                    print "raised Index Error", current_regions
+#            print current_regions
             report_text += ' , '.join(current_regions) + '\n\t'
             report_text += ' , '.join(['.. image:: ../results/' + region + '.pdf' for region in current_regions])
 #        if lastline is not True:
-        print "lastline", lastline
+#        print "lastline", lastline
         current_page += 1
         if regions != []:
             report_text += '\n\n' + newpage_template % (reportoutputfilename.rsplit('/')[1], current_page)
