@@ -282,39 +282,57 @@ def write_report(regions, reportoutputfilename, layout):
     Example Output (if installed, rst2pdf is used to convert to pdf):
     
     ::
+        reportoutputfilename, page 1
+        ==============================
 
         .. csv-table::
     
+            gene1, gene2
             results/gene1.pdf , results/gene2.pdf
+            gene3, gene4
             results/gene3.pdf , results/gene4.pdf
+            gene5, gene6
             results/gene5.pdf , results/gene6.pdf
         
+        reportoutputfilename, page 2
+        ==============================
+
+        .. csv-table::
+    
+            gene7, gene8
+            results/gene7.pdf , results/gene8.pdf
+
         (layout is (2, 3))
 
     """
-    pdfs = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
-    newpage_template = '''=======
-newpage
-=======
+#    pdfs = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
+    pdfs = sorted([region[0] for region in regions], reverse=True)
+    newpage_template = '''======================================================================================================
+%s, page %s
+======================================================================================================
 
     .. csv-table::
 '''
-    report_text = newpage_template
+    report_text = newpage_template % (reportoutputfilename.rsplit('/')[1], 1)
     lastline = False
+    current_page = 1
 
     while pdfs:
         for y in xrange(layout[1]):
             report_text += '\n\t'
-            thisline_pdfs = []
+            current_regions = []
             for x in xrange(layout[0]):
                 try:
-                    thisline_pdfs.append(pdfs.pop())
+                    current_regions.append(pdfs.pop())
+                    print current_regions
                 except IndexError:
                     lastline = True
                     pass
-            report_text += ' , '.join(thisline_pdfs) 
+            report_text += ' , '.join(current_regions) + '\n\t'
+            report_text += ' , '.join(['.. image:: ../results/' + region + '.pdf' for region in current_regions])
         if lastline != True:
-            report_text += '\n\n' + newpage_template
+            current_page += 1
+            report_text += '\n\n' + newpage_template % (reportoutputfilename.rsplit('/')[1], current_page)
 
 #    print report_text
     report = open(reportoutputfilename + '.rst', 'w')
