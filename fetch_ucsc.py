@@ -369,7 +369,11 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
 
 #    print reportoutputfilename
     # rst2pdf options: -s (apply stylesheet), -b 1 (break pages), -q (quiet execution)
-    subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q'])
+    try:
+        subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q'])
+        print "\n\nSaved multi-page report at %s.pdf\n\n" % reportoutputfilename
+    except:
+        print "Error when calling rst2pdf. Please check that rst2pdf is installed correctly. http://code.google.com/p/rst2pdf/"
 
 
 #def main():
@@ -390,7 +394,6 @@ if __name__ == '__main__':
             options.browser_config_file.rsplit('/', 1)[-1].split('.')[0],
             options.tracksfile.rsplit('/', 1)[-1].split('.')[0])
 
-    print "\n\nStoring report at %s.pdf\n\n" % reportfilename
     layout = [int(x) for x in options.layout.split('x')]
     write_report(regions, reportfilename, layout)
 
