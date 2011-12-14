@@ -13,8 +13,6 @@ example1_example_config_default, page 1
 	.. image:: ../results/GSC.pdf | .. image:: ../results/HSPB4.pdf
 	IL10 (involved in immunity) | OXTR (potentially associated to positive behaviour)
 	.. image:: ../results/IL10.pdf | .. image:: ../results/OXTR.pdf
-	PAR1X (Pseudo-autosomal Region, chromosome X) | PAR1Y (Pseudo-autosomal Region, chromosome Y)
-	.. image:: ../results/PAR1X.pdf | .. image:: ../results/PAR1Y.pdf
 
 ======================================================================================================
 example1_example_config_default, page 2
@@ -23,12 +21,10 @@ example1_example_config_default, page 2
     .. csv-table::
         :delim: |
 
+	PAR1X (Pseudo-autosomal Region, chromosome X) | PAR1Y (Pseudo-autosomal Region, chromosome Y)
+	.. image:: ../results/PAR1X.pdf | .. image:: ../results/PAR1Y.pdf
 	PRNP (Prion Protein) | ZGPAT (another gene chosen at random)
 	.. image:: ../results/PRNP.pdf | .. image:: ../results/ZGPAT.pdf
-	
-	
-	
-	
 	
 	
 	
