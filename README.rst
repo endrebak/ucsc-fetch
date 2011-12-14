@@ -26,10 +26,10 @@ Example:
 
 ::
   
-    #label, organism, assembly, chromosome, start, end, upstream, downstream
-    DPM2, human, hg18, 9, 130697374, 130700763, 0, 0
-    DPM1, human, hg18, 20, 49551405, 49575060, 0, 0
-    DPAGT1, human, hg18, 11, 118967214, 118972785, 0, 0
+    #label, organism, assembly, chromosome, start, end, description, upstream, downstream
+    IL10, human, hg18, chr1, 205007571, 205012462, "involved in immunity", 10000, 1000
+    PRNP, human, hg18, chr20, 4615157, 4630234, "Prion Protein", 10000, 10000
+    HSPB4, human, hg18, chr21, 43462210, 43465982, "Heat-shock protein", 10000, 10000
 
 Look at params/regions/default.txt for an example Regions file.
 

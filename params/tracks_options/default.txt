@@ -24,6 +24,7 @@ cons44way=hide
 snp130=hide
 snpArray=hide
 refGene=hide
+wgEncodeRegMarkPromoter=full
 knownGene=full
 rmsk=hide
 phyloP46wayPlacental=hide
