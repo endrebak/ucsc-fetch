@@ -147,11 +147,16 @@ def get_regions(regionsfile):
             description = fields[6]
         if len(fields) > 7:
             upstream = int(fields[7])
+#            logging.debug(upstream)
         if len(fields) > 8:
             downstream = int(fields[8])
+#            logging.debug(downstream)
 
         if not chromosome.startswith('chr'):
             chromosome = 'chr' + chromosome
+        
+        start = int(start) - upstream
+        end = int(end) + downstream
         regions.append((label, organism, assembly, chromosome, start, end, description))
 
     return regions
