@@ -45,6 +45,9 @@ Example:
 
     [visual_options]
 
+    [custom_tracks]
+    track1 = http://pastebin.com/raw.php?i=CKCuYGmX
+
     [tracks]
     wgRna=hide
     wgEncodeReg=hide
@@ -57,7 +60,8 @@ Example:
     snp130=hide
     snpArray=hide
     refGene=hide
-    knownGene=hide
+    wgEncodeRegMarkPromoter=full
+    knownGene=full
     rmsk=hide
     phyloP46wayPlacental=hide
 
