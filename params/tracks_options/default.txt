@@ -20,7 +20,7 @@ ensGene=hide
 mrna=hide
 intronEst=hide
 mgcGenes=hide
-cons44way=hide
+cons44way=full
 snp130=hide
 snpArray=hide
 refGene=hide
@@ -28,5 +28,4 @@ wgEncodeRegMarkPromoter=full
 knownGene=full
 rmsk=hide
 phyloP46wayPlacental=hide
-
 
