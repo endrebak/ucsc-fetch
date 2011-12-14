@@ -7,8 +7,8 @@ example1_example_config_default, page 1
 
 	ALG1 (involved in glycosylation) | COX2 (involved in inflammation)
 	.. image:: ../results/ALG1.pdf | .. image:: ../results/COX2.pdf
-	DPM1 (DPM1) | DPM1_100kwindow (DPM1 with a 100k zoom out)
-	.. image:: ../results/DPM1.pdf | .. image:: ../results/DPM1_100kwindow.pdf
+	DPM1 (DPM1) | DPM1_100k (DPM1 with a 100k zoom out)
+	.. image:: ../results/DPM1.pdf | .. image:: ../results/DPM1_100k.pdf
 	GSC (a gene chosen at random) | HSPB4 (Heat-shock protein)
 	.. image:: ../results/GSC.pdf | .. image:: ../results/HSPB4.pdf
 	IL10 (involved in immunity) | OXTR (potentially associated to positive behaviour)
