@@ -381,8 +381,8 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
         print "Error when calling rst2pdf. Please check that rst2pdf is installed correctly. http://code.google.com/p/rst2pdf/"
 
 
-#def main():
-if __name__ == '__main__':
+def main():
+#if __name__ == '__main__':
     (options, args) = get_options()
     browseroptions = get_browser_config(options.browser_config_file)
 #    print browseroptions
@@ -402,5 +402,10 @@ if __name__ == '__main__':
     layout = [int(x) for x in options.layout.split('x')]
     write_report(regions, reportfilename, layout)
 
+if __name__ == "__main__":
+    import doctest
+    if doctest.testmod(optionflags=doctest.ELLIPSIS |\
+                                   doctest.NORMALIZE_WHITESPACE).failed == 0:
+        main()
 
 #    main()
