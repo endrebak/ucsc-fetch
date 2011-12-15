@@ -17,7 +17,11 @@ Input files:
 
 import optparse
 import sys 
-import mechanize
+try:
+    import mechanize
+except ImportError:
+    print "You need to install the mechanize module. Get it at http://wwwsearch.sourceforge.net/mechanize/ or through easy_install"
+    sys.exit(1)
 import cookielib
 import ConfigParser
 import re
