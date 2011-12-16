@@ -337,7 +337,7 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
             gene7, gene8
             results/gene7.pdf , results/gene8.pdf
 
-        (layout is (2, 3))
+        (layout is (3, 2))
 
     """
 #    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
@@ -362,10 +362,10 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
     current_page = 1
 
     while regions_keys:
-        for row in xrange(layout[1]): # TODO: this is inverted
+        for row in xrange(layout[0]): 
             report_text += '\n\t'
             thisrow_regionkeys = []
-            for column in xrange(layout[0]):
+            for column in xrange(layout[1]):
                 try:
                     thisrow_regionkeys.append(regions_keys.pop())
                 except IndexError:
