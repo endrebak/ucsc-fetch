@@ -1,0 +1,35 @@
+[visual_options]
+
+
+[custom_tracks]
+# URLs to Custom tracks.
+# note: only one URL will be shown. To upload multiple custom tracks, create an
+# headers file as described http://genome.ucsc.edu/goldenPath/help/customTrack.html
+#track1 = http://pastebin.com/raw.php?i=Szua4x1L
+
+[tracks]
+# Define which tracks to show or hide. 
+# To know a table's name, look at his schema.
+# the tracks listed below are the ones that are usually shown by default in a
+# UCSC browser installation, so if you set them all to "Hide", no tracks will be
+# visualized.
+refGene                         =   dense
+knownGene                       =   hide
+
+
+affyDrosDevSignal               =   dense
+bdtnpDnase                      =   dense
+multiz15way                     =   full
+
+wgRna                           =   hide
+wgEncodeReg                     =   hide
+cpgIslandExt                    =   hide
+ensGene                         =   hide
+mrna                            =   hide
+intronEst                       =   hide
+mgcGenes                        =   hide
+#cons44way                       =   full
+#wgEncodeRegMarkPromoter         =   full
+rmsk                            =   hide
+phyloP46wayPlacental            =   hide
+

@@ -1,0 +1,10 @@
+#label, chromosome, start, end, upstream, downstream
+Hippo, drosophila, dm3, chr2R, 15381801, 15384372, "kinase", 0, 0
+Hippo_400k, drosophila, dm3, chr2R, 15381801, 15384372, "Hippo with a 400000 zoom out", 400000, 400000
+Warts, drosophila, dm3, chr3R, 26615379, 26632341, "kinase", 0, 0
+Warts_400k, drosophila, dm3, chr3R, 26615379, 26632341, "Warts with a 400000 zoom out", 400000, 400000
+Yorkie, drosophila, dm3, chr2R, 19953501, 19956008, "coactivator", 0, 0
+Yorkie_400k, drosophila, dm3, chr2R, 19953501, 19956008, "Yorkie with a 400000 zoom out", 400000, 400000
+Scalloped, drosophila, dm3, chrX, 15706362, 15719530, "transcription fator", 0, 0
+Scalloped_400k, drosophila, dm3, chrX, 15706362, 15719530, "Scalloped with a 400000 zoom out", 400000, 400000
+
