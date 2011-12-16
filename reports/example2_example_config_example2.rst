@@ -25,3 +25,10 @@ example2_example_config_example2, page 2
 	.. image:: ../results/IL10.pdf | .. image:: ../results/IL10_400k.pdf
 	OXTR (potentially associated to positive behaviour) | OXTR_400k (IL10 with a 400k zoom out)
 	.. image:: ../results/OXTR.pdf | .. image:: ../results/OXTR_400k.pdf
+
+======================================================================================================
+example2_example_config_example2, page 3
+======================================================================================================
+
+    .. csv-table::
+        :delim: |

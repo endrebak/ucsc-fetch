@@ -129,7 +129,7 @@ def get_regions(regionsfile):
         gene1_1000window, human, hg18, chr2, 2000, 3000, "my favorite gene with a 1k zoom out", 1000, 1000
 
     """
-    regions = []
+    regions = {}
 
     
     regionsfile_contents = open(regionsfile, 'r')
@@ -161,7 +161,10 @@ def get_regions(regionsfile):
         
         start = int(start) - upstream
         end = int(end) + downstream
-        regions.append((label, organism, assembly, chromosome, start, end, description))
+        if regions.has_key(label):
+            raise Exception("duplicated entry in Regions file")
+        regions[label] = {'label': label, 'organism': organism, 'assembly': assembly, 'chromosome': chromosome, 
+                'start': start, 'end': end, 'description': description}
 
     return regions
 
@@ -340,9 +343,11 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
 #    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
     print regions
     if sort_regions:
-        regions = sorted(regions, reverse=True, key=lambda x:x[0])
+        regions_keys = sorted(regions.keys(), reverse=True)
     else: 
-        regions.reverse()
+        # untested
+        regions_keys = regions.keys()
+        regions.keys.reverse()
     print regions
 
     newpage_template = '''======================================================================================================
@@ -356,19 +361,20 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
     lastline = False
     current_page = 1
 
-    while regions:
-        for y in xrange(layout[1]):
+    while regions_keys:
+        for row in xrange(layout[1]): # TODO: this is inverted
             report_text += '\n\t'
-            current_regions = []
-            for x in xrange(layout[0]):
+            thisrow_regionkeys = []
+            for column in xrange(layout[0]):
                 try:
-                    current_regions.append(regions.pop())
-                except:
+                    thisrow_regionkeys.append(regions_keys.pop())
+                except IndexError:
                     lastline = True
-#                    print "raised Index Error", current_regions
-#            print current_regions
-            report_text += ' | '.join(['%s (%s)' % (region[0], region[-1]) for region in current_regions]) + '\n\t'
-            report_text += ' | '.join(['.. image:: ../results/' + region[0] + '.pdf' for region in current_regions])
+#                    print "raised Index Error", thisrow_regionkeys
+
+#            print thisrow_regionkeys
+            report_text += ' | '.join(['%s (%s)' % (regions[region_key]['label'], regions[region_key]['description']) for region_key in thisrow_regionkeys]) + '\n\t'
+            report_text += ' | '.join(['.. image:: ../results/' + regions[region_key]['label'] + '.pdf' for region_key in thisrow_regionkeys])
 #        if lastline is not True:
 #        print "lastline", lastline
         current_page += 1
@@ -399,9 +405,11 @@ def main():
     trackoptions_string = get_tracks_options(options.tracksfile)
 
     regions = get_regions(options.regionsfile)
-    for region in regions:
-        (label, organism, assembly, chromosome, start, end, description) = region
-        browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+    for (label, region) in regions.items():
+#        (label, organism, assembly, chromosome, start, end, description) = region
+        browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, region['chromosome'], region['organism'], region['assembly'], 
+                region['start'], region['end'], region['label'])
+        regions[label]['browser_url'] = browser_url
         print browser_url
         print
 
