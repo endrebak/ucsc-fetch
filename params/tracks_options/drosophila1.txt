@@ -17,7 +17,7 @@ refGene                         =   dense
 knownGene                       =   hide
 
 
-affyDrosDevSignal               =   full
+affyDrosDevSignal               =   dense
 bdtnpDnase                      =   dense
 multiz15way                     =   full
 flyBaseNoncoding                =   hide
