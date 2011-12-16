@@ -13,19 +13,19 @@ track1 = http://pastebin.com/raw.php?i=Szua4x1L
 # the tracks listed below are the ones that are usually shown by default in a
 # UCSC browser installation, so if you set them all to "Hide", no tracks will be
 # visualized.
-wgRna=hide
-wgEncodeReg=hide
-cpgIslandExt=hide
-ensGene=hide
-mrna=hide
-intronEst=hide
-mgcGenes=hide
-cons44way=full
-snp130=hide
-snpArray=hide
-refGene=hide
-wgEncodeRegMarkPromoter=full
-knownGene=full
-rmsk=hide
-phyloP46wayPlacental=hide
+wgRna                           =   hide
+wgEncodeReg                     =   hide
+cpgIslandExt                    =   hide
+ensGene                         =   hide
+mrna                            =   hide
+intronEst                       =   hide
+mgcGenes                        =   hide
+cons44way                       =   full
+snp130                          =   hide
+snpArray                        =   hide
+refGene                         =   hide
+wgEncodeRegMarkPromoter         =   full
+knownGene                       =   dense
+rmsk                            =   hide
+phyloP46wayPlacental            =   hide
 
