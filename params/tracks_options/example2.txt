@@ -29,9 +29,10 @@ knownGene               =       dense
 rmsk                    =       hide
 phyloP46wayPlacental    =       hide
 wgEncodeRegMarkEnhH3k4me1=      full
-hgdpIhs                 =       hide
-hgdpXPEHH               =       hide
-ntHumChimpCodingDiff    =       full
+hgdpIhs                 =       full
+hgdpXPEHH               =       full
+ntHumChimpCodingDiff    =       dense
 affyAllExonSuper        =       full
+affyExonTissues         =       full
 #ntModernHumans          =       full
 #
