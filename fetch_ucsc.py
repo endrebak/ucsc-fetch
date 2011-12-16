@@ -269,16 +269,24 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
     
     outputfilename = "%s/%s.pdf" % (options.outputfolder, label)
     
-    print "\ngetting screenshot for %s" % label
+    print "\ngetting screenshot for %s.... " % label
     target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
 
     if options.skip_existing and os.path.exists(outputfilename):
-        print "Output file %s already exists, and skip_existing is true. So I am not downloading this file." % (outputfilename)
+        print "\nOutput file %s already exists, and skip_existing is true. So I am not downloading this file." % (outputfilename)
     else:
         # wait interval between different searches. 
         query_interval = int(browseroptions['query_interval'])
-        print "\nWaiting %s seconds between each query\n" % query_interval
-        time.sleep(query_interval)
+        print "\nWaiting %s seconds between each query, following UCSC guidelines (http://genome.ucsc.edu/FAQ/FAQdownloads.html#download2)" % query_interval
+        print "Press Ctrl-C to cancel."
+        sys.stdout.write("[" + "-" * query_interval + "]\n ")
+        for i in xrange(query_interval):
+            time.sleep(1) # do real work here
+            # update the bar
+            sys.stdout.write("x")
+            sys.stdout.flush()
+
+#        time.sleep(query_interval)
 
         # connecting to browser
         logging.debug(target_url)
@@ -300,6 +308,7 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
         pdf_file.write(pdf_contents)
         pdf_file.close()
 
+    print "\ndone"
     browser_url = target_url.replace('&hgt.psOutput=on', '')
     return browser_url
 
