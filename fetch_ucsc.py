@@ -276,8 +276,8 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
         print "Output file %s already exists, and skip_existing is true. So I am not downloading this file." % (outputfilename)
     else:
         # wait interval between different searches. 
-        print "\nWaiting %s seconds between each query\n" % query_interval
         query_interval = int(browseroptions['query_interval'])
+        print "\nWaiting %s seconds between each query\n" % query_interval
         time.sleep(query_interval)
 
         # connecting to browser
@@ -341,14 +341,14 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
 
     """
 #    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
-    print regions
+#    print regions
     if sort_regions:
         regions_keys = sorted(regions.keys(), reverse=True)
     else: 
         # untested
         regions_keys = regions.keys()
         regions.keys.reverse()
-    print regions
+#    print regions
 
     newpage_template = '''======================================================================================================
 %s, page %s
@@ -410,7 +410,7 @@ def main():
         browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, region['chromosome'], region['organism'], region['assembly'], 
                 region['start'], region['end'], region['label'])
         regions[label]['browser_url'] = browser_url
-        print browser_url
+#        print browser_url
         print
 
     reportfilename = "reports/%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
