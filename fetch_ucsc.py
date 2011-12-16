@@ -376,6 +376,7 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
             report_text += ' | '.join(['`%s <%s>`_ (%s)' % (regions[region_key]['label'], regions[region_key]['browser_url'], regions[region_key]['description']) for region_key in thisrow_regionkeys]) + '\n\t'
             report_text += ' | '.join(['.. image:: ../results/' + regions[region_key]['label'] + '.pdf' for region_key in thisrow_regionkeys])
             report_text += '\n\t | '
+            report_text += '\n\t | '
 #        if lastline is not True:
 #        print "lastline", lastline
         current_page += 1
