@@ -265,17 +265,20 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
     """
     
     outputfilename = "%s/%s.pdf" % (options.outputfolder, label)
+    
+    print "\ngetting screenshot for %s" % label
+    target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
+
     if options.skip_existing and os.path.exists(outputfilename):
         print "Output file %s already exists, and skip_existing is true. So I am not downloading this file." % (outputfilename)
     else:
-        print "\ngetting screenshot for %s" % label
         # wait interval between different searches. 
-        query_interval = int(browseroptions['query_interval'])
         print "\nWaiting %s seconds between each query\n" % query_interval
+        query_interval = int(browseroptions['query_interval'])
         time.sleep(query_interval)
-        
-        target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
-        print(target_url)
+
+        # connecting to browser
+        logging.debug(target_url)
         br.open(target_url)
 
         pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
@@ -294,7 +297,8 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
         pdf_file.write(pdf_contents)
         pdf_file.close()
 
-    return 
+    browser_url = target_url.replace('&hgt.psOutput=on', '')
+    return browser_url
 
 def write_report(regions, reportoutputfilename, layout, sort_regions=True):
     """use RestructuredText to write a multi-page report
@@ -397,7 +401,9 @@ def main():
     regions = get_regions(options.regionsfile)
     for region in regions:
         (label, organism, assembly, chromosome, start, end, description) = region
-        response = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+        browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, chromosome, organism, assembly, start, end, label)
+        print browser_url
+        print
 
     reportfilename = "reports/%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
             options.browser_config_file.rsplit('/', 1)[-1].split('.')[0],
