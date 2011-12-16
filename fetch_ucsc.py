@@ -260,14 +260,14 @@ def initialize_browser(browseroptions):
 
     return br
 
-def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome, organism, assembly, start, end, label):
+def get_screenshot(options, br, browseroptions, tracksoptions_string, parameters_suffix, chromosome, organism, assembly, start, end, label):
     """
     Get a screenshot from a UCSC browser installation. 
 
     Note: to manually get a screenshot from UCSC, just add &hgt.psOutput=on to the URL, and then download the third link
     """
     
-    outputfilename = "%s/%s.pdf" % (options.outputfolder, label)
+    outputfilename = "%s/%s_%s.pdf" % (options.outputfolder, label, parameters_suffix)
     
     print "\ngetting screenshot for %s.... " % label
     target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
@@ -304,7 +304,7 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
             os.makedirs(outputfolder)
         except OSError:
             pass
-        pdf_file = open('%s/%s.pdf' % (outputfolder, label), 'w')
+        pdf_file = open(outputfilename, 'w')
         pdf_file.write(pdf_contents)
         pdf_file.close()
 
@@ -312,7 +312,7 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, chromosome
     browser_url = target_url.replace('&hgt.psOutput=on', '')
     return browser_url
 
-def write_report(regions, reportoutputfilename, layout, sort_regions=True):
+def write_report(regions, reportoutputfilename, parameters_suffix, layout, sort_regions=True):
     """use RestructuredText to write a multi-page report
 
 
@@ -383,7 +383,7 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
 
 #            print thisrow_regionkeys
             report_text += ' | '.join(['`%s <%s>`_ (%s)' % (regions[region_key]['label'], regions[region_key]['browser_url'], regions[region_key]['description']) for region_key in thisrow_regionkeys]) + '\n\t'
-            report_text += ' | '.join(['.. image:: ../results/' + regions[region_key]['label'] + '.pdf' for region_key in thisrow_regionkeys])
+            report_text += ' | '.join(['.. image:: ../results/' + regions[region_key]['label'] + '_' + parameters_suffix + '.pdf' for region_key in thisrow_regionkeys])
             report_text += '\n\t | '
             report_text += '\n\t | '
 #        if lastline is not True:
@@ -416,20 +416,24 @@ def main():
     trackoptions_string = get_tracks_options(options.tracksfile)
 
     regions = get_regions(options.regionsfile)
+
+    # suffix for output file names 
+    parameters_suffix = "%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
+            options.tracksfile.rsplit('/', 1)[-1].split('.')[0],
+            options.browser_config_file.rsplit('/', 1)[-1].split('.')[0])
+
     for (label, region) in regions.items():
 #        (label, organism, assembly, chromosome, start, end, description) = region
-        browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, region['chromosome'], region['organism'], region['assembly'], 
+        browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, parameters_suffix, region['chromosome'], region['organism'], region['assembly'], 
                 region['start'], region['end'], region['label'])
         regions[label]['browser_url'] = browser_url
 #        print browser_url
         print
 
-    reportfilename = "reports/%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
-            options.browser_config_file.rsplit('/', 1)[-1].split('.')[0],
-            options.tracksfile.rsplit('/', 1)[-1].split('.')[0])
+    reportfilename = "reports/%s" %  parameters_suffix
 
     layout = [int(x) for x in options.layout.split('x')]
-    write_report(regions, reportfilename, layout)
+    write_report(regions, reportfilename, parameters_suffix, layout)
 
 if __name__ == "__main__":
     import doctest
