@@ -9,7 +9,7 @@ drosophila1_drosophila1_drosophila, page 1
 	.. image:: ../results/Hippo_drosophila1_drosophila1_drosophila.pdf | .. image:: ../results/Hippo_400k_drosophila1_drosophila1_drosophila.pdf
 	 | 
 	 | 
-	`Scalloped <http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18?org=drosophila&db=dm3&position=chrX:15706362-15719530&flyBaseGene=hide&affyDrosDevSignal=dense&multiz15way=full&intronEst=hide&refGene=dense&mrna=hide&bdtnpChipper=hide&knownGene=hide&flyBaseNoncoding=hide&bdtnpDnase=hide&hgt.customText=>`_ (transcription fator) | `Scalloped_400k <http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18?org=drosophila&db=dm3&position=chrX:15306362-16119530&flyBaseGene=hide&affyDrosDevSignal=dense&multiz15way=full&intronEst=hide&refGene=dense&mrna=hide&bdtnpChipper=hide&knownGene=hide&flyBaseNoncoding=hide&bdtnpDnase=hide&hgt.customText=>`_ (Scalloped with a 400000 zoom out)
+	`Scalloped <http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18?org=drosophila&db=dm3&position=chrX:15706362-15719530&flyBaseGene=hide&affyDrosDevSignal=dense&multiz15way=full&intronEst=hide&refGene=dense&mrna=hide&bdtnpChipper=hide&knownGene=hide&flyBaseNoncoding=hide&bdtnpDnase=hide&hgt.customText=>`_ (transcription factor) | `Scalloped_400k <http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18?org=drosophila&db=dm3&position=chrX:15306362-16119530&flyBaseGene=hide&affyDrosDevSignal=dense&multiz15way=full&intronEst=hide&refGene=dense&mrna=hide&bdtnpChipper=hide&knownGene=hide&flyBaseNoncoding=hide&bdtnpDnase=hide&hgt.customText=>`_ (Scalloped with a 400000 zoom out)
 	.. image:: ../results/Scalloped_drosophila1_drosophila1_drosophila.pdf | .. image:: ../results/Scalloped_400k_drosophila1_drosophila1_drosophila.pdf
 	 | 
 	 | 
@@ -19,5 +19,13 @@ drosophila1_drosophila1_drosophila, page 1
 	 | 
 	`Yorkie <http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18?org=drosophila&db=dm3&position=chr2R:19953501-19956008&flyBaseGene=hide&affyDrosDevSignal=dense&multiz15way=full&intronEst=hide&refGene=dense&mrna=hide&bdtnpChipper=hide&knownGene=hide&flyBaseNoncoding=hide&bdtnpDnase=hide&hgt.customText=>`_ (coactivator) | `Yorkie_400k <http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18?org=drosophila&db=dm3&position=chr2R:19553501-20356008&flyBaseGene=hide&affyDrosDevSignal=dense&multiz15way=full&intronEst=hide&refGene=dense&mrna=hide&bdtnpChipper=hide&knownGene=hide&flyBaseNoncoding=hide&bdtnpDnase=hide&hgt.customText=>`_ (Yorkie with a 400000 zoom out)
 	.. image:: ../results/Yorkie_drosophila1_drosophila1_drosophila.pdf | .. image:: ../results/Yorkie_400k_drosophila1_drosophila1_drosophila.pdf
+	 | 
+	 | 
+	
+	
+	 | 
+	 | 
+	
+	
 	 | 
 	 | 
