@@ -17,19 +17,15 @@ refGene                         =   dense
 knownGene                       =   hide
 
 
-affyDrosDevSignal               =   dense
+affyDrosDevSignal               =   full
 bdtnpDnase                      =   dense
 multiz15way                     =   full
-
-wgRna                           =   hide
-wgEncodeReg                     =   hide
-cpgIslandExt                    =   hide
-ensGene                         =   hide
+flyBaseNoncoding                =   hide
 mrna                            =   hide
+bdtnpDnase                      =   hide
 intronEst                       =   hide
-mgcGenes                        =   hide
-#cons44way                       =   full
-#wgEncodeRegMarkPromoter         =   full
-rmsk                            =   hide
-phyloP46wayPlacental            =   hide
+bdtnpChipper                    =   hide
+flyBaseGene                     =   hide
+
+
 
