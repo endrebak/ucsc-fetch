@@ -378,7 +378,7 @@ def write_report(regions, reportoutputfilename, layout, sort_regions=True):
 #        if lastline is not True:
 #        print "lastline", lastline
         current_page += 1
-        if regions != []:
+        if regions_keys != []:
             report_text += '\n\n' + newpage_template % (reportoutputfilename.rsplit('/')[1], current_page)
 
 #    print report_text

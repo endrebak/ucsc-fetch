@@ -17,10 +17,3 @@ example1_example_config_default, page 1
 	.. image:: ../results/PAR1X.pdf | .. image:: ../results/PAR1Y.pdf
 	`PRNP <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr20:4605157-4640234&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (Prion Protein) | `ZGPAT <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr20:61799835-61847982&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (another gene chosen at random)
 	.. image:: ../results/PRNP.pdf | .. image:: ../results/ZGPAT.pdf
-
-======================================================================================================
-example1_example_config_default, page 2
-======================================================================================================
-
-    .. csv-table::
-        :delim: |
