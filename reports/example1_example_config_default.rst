@@ -1,0 +1,31 @@
+======================================================================================================
+example1_example_config_default, page 1
+======================================================================================================
+
+    .. csv-table::
+        :delim: |
+
+	`ALG1 <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr16:5051821-5085589&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (involved in glycosylation) | `COX2 <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr17:13903444-14062721&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (involved in inflammation)
+	.. image:: ../results/ALG1.pdf | .. image:: ../results/COX2.pdf
+	 | 
+	 | 
+	`DPM1 <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr20:48984812-49008467&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (DPM1) | `DPM1_100k <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr20:48884812-49108467&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (DPM1 with a 100k zoom out)
+	.. image:: ../results/DPM1.pdf | .. image:: ../results/DPM1_100k.pdf
+	 | 
+	 | 
+	`GSC <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr14:94294313-94316252&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (a gene chosen at random) | `HSPB4 <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr21:43452210-43475982&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (Heat-shock protein)
+	.. image:: ../results/GSC.pdf | .. image:: ../results/HSPB4.pdf
+	 | 
+	 | 
+	`IL10 <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr1:204997571-205022462&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (involved in immunity) | `OXTR <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr3:8757095-8796300&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (potentially associated to positive behaviour)
+	.. image:: ../results/IL10.pdf | .. image:: ../results/OXTR.pdf
+	 | 
+	 | 
+	`PAR1X <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chrX:-9999-2719520&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (Pseudo-autosomal Region, chromosome X) | `PAR1Y <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chrY:-9999-2719520&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (Pseudo-autosomal Region, chromosome Y)
+	.. image:: ../results/PAR1X.pdf | .. image:: ../results/PAR1Y.pdf
+	 | 
+	 | 
+	`PRNP <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr20:4605157-4640234&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (Prion Protein) | `ZGPAT <http://gb.ibe.upf.edu/cgi-bin/hgTracks?org=human&db=hg18&position=chr20:61799835-61847982&ensGene=hide&phyloP46wayPlacental=hide&refGene=hide&wgRna=hide&cons44way=full&knownGene=dense&rmsk=hide&snpArray=hide&intronEst=hide&wgEncodeRegMarkPromoter=full&mrna=hide&wgEncodeReg=hide&cpgIslandExt=hide&snp130=hide&mgcGenes=hide&hgt.customText=http://pastebin.com/raw.php?i=Szua4x1L>`_ (another gene chosen at random)
+	.. image:: ../results/PRNP.pdf | .. image:: ../results/ZGPAT.pdf
+	 | 
+	 | 

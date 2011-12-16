@@ -1,0 +1,32 @@
+[browser]
+# Email address (mandatory). This will appear in the logs of the UCSC browser,
+# and will be used by the administrator to contact you, if necessary.
+email = 
+
+# Base UCSC Url. You can point it to a UCSC mirror, or to a custom instance that
+# you have access to.
+ucsc_base_url = http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18
+
+# Interval between queries. The UCSC guidelines ask to wait at least 15 seconds
+# between two automated queries. Please respect this limit.
+# See http://genome.ucsc.edu/FAQ/FAQdownloads.html#download2 for more
+# information.
+query_interval = 15
+
+# User Agent. This will appear in the logs of the UCSC browser. Please do not change unless necessary.
+user-agent = Mechanize client to get screenshots from the UCSC browser. https://bitbucket.org/dalloliogm/ucsc-fetch
+
+# If you are using a UCSC private instance that requires an username and
+# password, fill the following two fields:
+username =
+password =
+
+# Proxy configuration. Set up if you are working from behind a proxy.
+httpproxy = 
+httproxy_port =
+httproxy_password =
+
+
+#[output]
+## Define where to save the output
+#outputfolder=results/
