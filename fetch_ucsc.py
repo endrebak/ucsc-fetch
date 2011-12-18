@@ -405,6 +405,7 @@ def write_report(regions, reportoutputfilename, parameters_suffix, layout, sort_
 #    print reportoutputfilename
     # rst2pdf options: -s (apply stylesheet), -b 1 (break pages), -q (quiet execution)
     try:
+        logging.debug(' '.join(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q']))
         subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q'])
         print "\n\nSaved multi-page report at %s.pdf\n\n" % reportoutputfilename
     except:
