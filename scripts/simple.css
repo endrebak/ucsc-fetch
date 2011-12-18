@@ -107,10 +107,8 @@
     normal:
       parent: base
 
-    title_reference:
+    title-reference:
       parent: normal
-      spaceBefore: 6
-      spaceAfter: 1
       fontName: stdItalic
 
     bodytext:
@@ -132,8 +130,6 @@
     line:
       parent: lineblock
       spaceBefore: 0
-      fontSize : 2
-      size : 2
 
     toc1:
       parent: toc
@@ -222,34 +218,34 @@
       parent: bodytext
       alignment: TA_CENTER
 
-    bullet_list:
+    bullet-list:
       parent: bodytext
       commands: []
              [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
              [RIGHTPADDING, [ 0, 0 ], [ 1, -1 ], 0 ]
       colWidths: ["20", null]
 
-    bullet_list_item:
+    bullet-list-item:
       parent: bodytext
 
-    item_list:
+    item-list:
       parent: bodytext
       commands: []
              [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
              [RIGHTPADDING, [ 0, 0 ], [ 1, -1 ], 0 ]
       colWidths: [20pt,null]
 
-    item_list_item:
+    item-list-item:
       parent: bodytext
 
-    definition_list_term:
+    definition-list-term:
       parent: normal
       fontName: stdBold
       spaceBefore: 4
       spaceAfter: 0
       keepWithNext: true
 
-    definition_list_classifier:
+    definition-list-classifier:
       parent: normal
       fontName: stdItalic
 
@@ -284,11 +280,11 @@
 
     title:
       parent: heading
-#      fontName: stdBold
-      fontSize: 80%
+      fontName: stdBold
+      fontSize: 200%
       alignment: TA_CENTER
       keepWithNext: false
-      spaceAfter: 1
+      spaceAfter: 10
 
     subtitle:
       parent: title
@@ -297,9 +293,8 @@
 
     heading1:
       parent: heading
-#      fontName: stdBold
-      fontSize: 65%
-      alignment: TA_CENTER
+      fontName: stdBold
+      fontSize: 175%
 
     heading2:
       parent: heading
@@ -422,16 +417,13 @@
       parent: literal
 
     table:
-      spaceBefore:2
+      spaceBefore:6
       spaceAfter:0
       alignment: TA_CENTER
       commands: []
              [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
-             # File "/usr/lib/python2.6/dist-packages/reportlab/platypus/tables.py", line 989, in _drawLines
-             #  op, [startcolumn,startrow], [endcolumn,endrow], weight, color
-             [INNERGRID, [ 0, -1], [ -1, -1 ], 0.25, white ]
-             [ROWBACKGROUNDS, [0, 0], [-1, -1], [white]]
-             [BOX, [ 0, -1 ], [ 0, -1 ], 0.25, white ]
+             [INNERGRID, [ 0, 0 ], [ -1, -1 ], 0.25, white ]
+             [BOX, [ 0, 0 ], [ -1, -1 ], 0.25, white ]
 
     table-title:
       parent : heading4
@@ -447,9 +439,6 @@
 
     table-body:
       parent : normal
-      alignment : TA_CENTER
-      fontSize : 8
-      valign : BOTTOM
 
     dedication:
       parent : normal
@@ -550,7 +539,7 @@
             [RIGHTPADDING, [ 0, 0 ], [ 1, -1 ], 0 ]
         colWidths: [3cm, null]
 
-    field_list:
+    field-list:
         parent: bodytext
         commands: []
             [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
@@ -558,7 +547,7 @@
         colWidths: [3cm, null]
         spaceBefore: 6
 
-    option_list:
+    option-list:
         commands: []
             [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
             [TOPPADDING, [ 0, 0 ], [ -1, -1 ], 0 ]
