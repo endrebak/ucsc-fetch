@@ -135,6 +135,7 @@ def get_regions(regionsfile):
     regionsfile_contents = open(regionsfile, 'r')
 
     scanner = csv.reader(regionsfile_contents, delimiter=',', skipinitialspace=True)
+    current_position = 0
 
     for fields in scanner:
         if fields == []:
@@ -143,6 +144,7 @@ def get_regions(regionsfile):
         if fields[0].startswith('#'):
             logging.debug("comment")
             continue
+        current_position += 1
         logging.debug(fields)
         description = ''
         upstream = downstream = 0
@@ -163,7 +165,7 @@ def get_regions(regionsfile):
         end = int(end) + downstream
         if regions.has_key(label):
             raise Exception("duplicated entry in Regions file")
-        regions[label] = {'label': label, 'organism': organism, 'assembly': assembly, 'chromosome': chromosome, 
+        regions[label] = {'position': current_position, 'label': label, 'organism': organism, 'assembly': assembly, 'chromosome': chromosome, 
                 'start': start, 'end': end, 'description': description}
 
     return regions
@@ -355,8 +357,11 @@ def write_report(regions, reportoutputfilename, parameters_suffix, layout, sort_
         regions_keys = sorted(regions.keys(), reverse=True)
     else: 
         # untested
-        regions_keys = regions.keys()
-        regions.keys.reverse()
+#        regions_keys = regions.keys()
+        print [(regions[key]['label'], regions[key]['position']) for key in regions.keys()]
+        regions_keys = sorted(regions.keys(), key=lambda x:regions[x]['position'], reverse=True)
+        print regions_keys
+#        regions_keys.reverse()
 #    print regions
 
     newpage_template = '''======================================================================================================
@@ -433,7 +438,7 @@ def main():
     reportfilename = "reports/%s" %  parameters_suffix
 
     layout = [int(x) for x in options.layout.split('x')]
-    write_report(regions, reportfilename, parameters_suffix, layout)
+    write_report(regions, reportfilename, parameters_suffix, layout, False)
 
 if __name__ == "__main__":
     import doctest
