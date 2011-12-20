@@ -3,11 +3,11 @@ test:
 
 # NOTE: the following uses a custom browser configuration file that is not included in the repository. This is how I debug the script from my personal computer; but if you want to use these scripts you should define your own email address in a browser_config file.
 example1:
-	python fetch_ucsc.py -r params/regions/example1.txt -t params/tracks_options/example1.txt -u params/browser_config/exampleconfig.txt -s -l 6x2
+	python fetch_ucsc.py -r params/regions/example1.txt -t params/tracks_options/example1.txt -u params/browser_config/exampleconfig.txt -l 6x2 --title example1 -s 
 example2:
-	python fetch_ucsc.py -r params/regions/example2.txt -t params/tracks_options/example2.txt -u params/browser_config/exampleconfig.txt -s -l 6x2
+	python fetch_ucsc.py -r params/regions/example2.txt -t params/tracks_options/example2.txt -u params/browser_config/exampleconfig.txt -l 6x2 --title example2 -s 
 drosophila_example:
-	python fetch_ucsc.py -r params/regions/drosophila1.txt -t params/tracks_options/drosophila1.txt -u params/browser_config/drosophila.txt -s -l 6x2
+	python fetch_ucsc.py -r params/regions/drosophila1.txt -t params/tracks_options/drosophila1.txt -u params/browser_config/drosophila.txt -l 6x2 --title drosophila_example1 -s
 ibe:
 	ipython fetch_ucsc.py -- -s -l2x2 -r params/regions/ibe.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
 
