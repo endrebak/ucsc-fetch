@@ -280,8 +280,8 @@
 
     title:
       parent: heading
-      fontName: stdBold
-      fontSize: 200%
+      fontName: stdNormal
+      fontSize: 55%
       alignment: TA_CENTER
       keepWithNext: false
       spaceAfter: 10
@@ -293,8 +293,8 @@
 
     heading1:
       parent: heading
-      alignment: TA_CENTER
       fontName: stdNormal
+      alignment: TA_CENTER
       fontSize: 55%
 
     heading2:
