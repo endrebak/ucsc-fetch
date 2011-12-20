@@ -293,8 +293,9 @@
 
     heading1:
       parent: heading
-      fontName: stdBold
-      fontSize: 175%
+      alignment: TA_CENTER
+      fontName: stdNormal
+      fontSize: 55%
 
     heading2:
       parent: heading
