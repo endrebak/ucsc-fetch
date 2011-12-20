@@ -174,17 +174,15 @@ def regions_to_bed(regions):
     """
     Convert a regions dictionary to a BED file, to be uploaded.
 
-    >>> regions = {
-            'HSPB4': {'start': 43452210, 'assembly': 'hg18', 'description': 'Heat-shock protein', 'position': 9, 'end': 43475982, 'organism': 'human', 'chromosome': 'chr21', 'label': 'HSPB4'}, 
-            'PAR1X': {'start': -9999, 'assembly': 'hg18', 'description': 'Pseudo-autosomal Region, chromosome X', 'position': 10, 'end': 2719520, 'organism': 'human', 'chromosome': 'chrX', 'label': 'PAR1X'}, 
-            'ZGPAT': {'start': 61799835, 'assembly': 'hg18', 'description': 'another gene chosen at random', 'position': 12, 'end': 61847982, 'organism': 'human', 'chromosome': 'chr20', 'label': 'ZGPAT'}
+    >>> regions = {\
+            'HSPB4': {'start': 43452210, 'assembly': 'hg18', 'description': 'Heat-shock protein', 'position': 9, 'end': 43475982, 'organism': 'human', 'chromosome': 'chr21', 'label': 'HSPB4'}, \
+            'PAR1X': {'start': -9999, 'assembly': 'hg18', 'description': 'Pseudo-autosomal Region, chromosome X', 'position': 10, 'end': 2719520, 'organism': 'human', 'chromosome': 'chrX', 'label': 'PAR1X'}, \
+            'ZGPAT': {'start': 61799835, 'assembly': 'hg18', 'description': 'another gene chosen at random', 'position': 12, 'end': 61847982, 'organism': 'human', 'chromosome': 'chr20', 'label': 'ZGPAT'}\
             }
     
-    >>> example_bed_output = '''track name=regions description="Region of interest" useScore=0
-    chr21   43452210    43475982    HSPB4 
-    
-    chr22 2000 6000 cloneB 900 - 2000 6000 0 2 433,399, 0,3601
-    '''
+    >>> example_bed_output = '''track name=regions description="Region of interest" useScore=0\
+chr21   43452210    43475982    HSPB4 \
+chr22 2000 6000 cloneB 900 - 2000 6000 0 2 433,399, 0,3601'''
     
     """
 
