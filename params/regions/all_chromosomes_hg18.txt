@@ -1,3 +1,4 @@
+#label, organism, chromosome, start, end, description, upstream, downstream
 chr1, human, hg18, 1, 0, 247249719
 chr2, human, hg18, 2, 0, 242951149
 chr3, human, hg18, 3, 0, 199501827

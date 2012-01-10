@@ -1,4 +1,4 @@
-#label, chromosome, start, end, upstream, downstream
+#label, organism, chromosome, start, end, description, upstream, downstream
 COX2, human, hg18, chr17, 13913444, 14052721, "involved in inflammation", 10000, 10000
 OXTR, human, hg18, chr3, 8767095, 8786300, "potentially associated to positive behaviour", 10000, 10000
 DPM1, human, hg18, 20, 48984812, 49008467, "DPM1", 0, 0
