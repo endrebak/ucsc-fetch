@@ -17,20 +17,27 @@ import optparse
 logging.basicConfig(level=logging.DEBUG)
 
 def get_options():
-    parser = optparse.OptionParser(usage=__doc__)
+    parser = optparse.OptionParser(usage="python get_gene_coords.py -l genelist.txt -d hg19")
     parser.add_option('-l', '-g', '-f', '--list', '--list_of_genes', '--genes', dest='genes', 
             help='file containing the list of gene. One symbol per line', default=False)
     parser.add_option('-d', '--database', dest='database',
             help='database version (e.g. hg18 or hg19). Default: hg19', default='hg19')
     (options, args) = parser.parse_args()
     
-    if options.genes == '':
+    if (options.genes is False) and (len(args) == 0):
         parser.print_help()
         parser.error('get_gene_coords.py: genes file not defined.')
-
+    print args
+    print options.genes
     try:
-        genelist_path = options.genes
-        genelist_h = open(genelist_path, 'r')
+        genelist_path = ''
+        if options.genes is not False:
+            genelist_path = options.genes
+        elif args != '':
+            genelist_path = args[0]
+        print genelist_path
+        if genelist_path != '':
+            genelist_h = open(genelist_path, 'r')
     except:
         print __doc__
         parser.error("Can not open genes file")
