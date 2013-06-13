@@ -235,7 +235,13 @@ def get_tracks_options(tracksfile):
     if parser.items('visual_options'):
         tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('visual_options')])
 
-    tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[1] for x in parser.items("custom_tracks")])
+    # Custom tracks
+    if parser.has_section("custom_tracks"):
+        tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[1] for x in parser.items("custom_tracks")])
+
+    # Custom Hubs
+    if parser.has_section("track_hubs"):
+        tracksfile_string += '&hubUrl=' + '&hubUrl='.join([x[1] for x in parser.items("track_hubs")])
 
     return tracksfile_string
 
