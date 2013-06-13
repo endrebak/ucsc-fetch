@@ -310,6 +310,7 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, title_suff
 
         # connecting to browser
         logging.debug(target_url)
+        print(target_url)
         br.open(target_url)
 
         pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
