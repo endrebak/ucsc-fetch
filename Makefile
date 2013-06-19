@@ -14,6 +14,9 @@ ibe:
 results/chr1.pdf: params/tracks_options/ibe.txt params/regions/all_chromosomes_hg18.txt
 	python fetch_ucsc.py -r params/regions/all_chromosomes_hg18.txt -t params/tracks_options/ibe.txt -u params/browser_config/ibe.txt
 
+genotype_space:
+	python fetch_ucsc.py -r params/regions/all_chromosomes_hg19.txt -t params/tracks_options/genotype_space.txt -u params/browser_config/genotypespace_ibe.txt -l 1x1  -s
+
 
 #all_chromosomes_report:
 #	python fetch_ucsc.py -r params/regions/all_chromosomes_hg18.txt -t params/tracks_options/default.txt -u params/browser_config/default.txt

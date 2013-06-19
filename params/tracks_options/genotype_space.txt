@@ -7,8 +7,8 @@
 # headers file as described http://genome.ucsc.edu/goldenPath/help/customTrack.html
 #track1 = http://pastebin.com/raw.php?i=Szua4x1L
 
-[track_hubs]
-track1 = http://bioevo.upf.edu/~gdallolio/genotype_space/hub.txt
+#[track_hubs]
+#track1 = http://bioevo.upf.edu/~gdallolio/genotype_space/hub.txt
 
 [tracks]
 # Define which tracks to show or hide. 
@@ -26,7 +26,7 @@ mgcGenes                =       hide
 cons44way               =       hide
 snp130                  =       hide
 snpArray                =       hide
-refGene                 =       pack
+refGene                 =       dense
 wgEncodeRegMarkPromoter =       hide
 knownGene               =       hide
 rmsk                    =       hide
@@ -38,16 +38,18 @@ ntHumChimpCodingDiff    =       hide
 affyAllExonSuper        =       hide
 affyExonTissues         =       hide
 ntModernHumans          =       hide
+recombRate              =       dense
+Gap                     =       dense
 
 
 XPEHH_pvalues           =       hide
-XPEHH_stats             =       hide
+XPEHH_scores            =       hide
 FayWu_pvalues           =       hide
-FayWu_stats             =       hide
+FayWu_scores            =       hide
 TajD_pvalues            =       hide
-TajD_stats              =       full
+TajimasD_scores         =       full
 XPCLR_pvalues           =       hide
-XPCLR_stats             =       full
-iHS_stats             =       hide
-iHS_stats             =       hide
+XPCLR_scores            =       hide
+iHS_scores              =       hide
+iHS_scores              =       hide
         
