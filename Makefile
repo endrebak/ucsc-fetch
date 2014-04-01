@@ -1,3 +1,7 @@
+# define your own email address in a browser_config file first
+sessionEx1:
+	python fetch_ucsc.py -r params/regions/session1.txt -t params/tracks_options/session1.txt -u params/browser_config/default.txt
+
 test:
 	python fetch_ucsc.py -r params/regions/default.txt -t params/tracks_options/default.txt -u params/browser_config/default.txt
 
