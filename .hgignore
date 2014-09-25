@@ -1,0 +1,12 @@
+syntax: glob
+params/browser_config/ibe.txt
+params/browser_config/example_config.txt
+params/tracks_options/ibe.txt
+params/regions/ibe.txt
+*.swp
+results/*.pdf
+results/*
+reports/*
+mechanize/*
+params/*/*
+local_install/*

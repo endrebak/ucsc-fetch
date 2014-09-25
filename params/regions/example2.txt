@@ -1,0 +1,14 @@
+#label, organism, chromosome, start, end, description, upstream, downstream
+COX2, human, hg18, chr17, 13913444, 14052721, "involved in inflammation", 0, 0
+COX2_400k, human, hg18, chr17, 13913444, 14052721, "COX2 with a 400k zoom out", 400000, 400000
+OXTR, human, hg18, chr3, 8767095, 8786300, "potentially associated to positive behaviour", 0, 0
+OXTR_400k, human, hg18, chr3, 8767095, 8786300, "OXTR with a 400k zoom out", 400000, 400000
+DPM1, human, hg18, 20, 48984812, 49008467, "DPM1", 0, 0
+DPM1_400k, human, hg18, 20, 48984812, 49008467, "DPM1 with a 400k zoom out", 400000, 400000
+ALG1, human, hg18, chr16, 5061821, 5075589, "involved in glycosylation", 0, 0
+ALG1_400k, human, hg18, chr16, 5061821, 5075589, "ALG1 with a 400k zoom out", 400000, 400000
+GSC, human, hg18, chr14, 94304313, 94306252, "a gene chosen at random", 0, 0
+GSC_400k, human, hg18, chr14, 94304313, 94306252, "GSC with a 400k zoom out", 400000, 400000
+IL10, human, hg18, chr1, 205007571, 205012462, "involved in immunity", 0, 0
+IL10_400k, human, hg18, chr1, 205007571, 205012462, "IL10 with a 400k zoom out", 400000, 400000
+

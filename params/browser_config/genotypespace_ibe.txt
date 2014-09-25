@@ -1,0 +1,11 @@
+[browser]
+ucsc_base_url = http://pgb.ibe.upf.edu/cgi-bin/hgTracks
+username = 
+password = 
+query_interval = 1
+user-agent = Mechanize client to get screenshots from the UCSC browser. Home page: https://bitbucket.org/dalloliogm/ucsc-fetch
+email = giovanni.dallolio@upf.edu
+httpproxy = 
+httproxy_port = 
+httproxy_password =
+

@@ -1,0 +1,23 @@
+#label, organism, chromosome, start, end, description, upstream, downstream
+chr1, human, hg19, 1, 0, 249250621
+chr2, human, hg19, 2, 0, 243199373
+chr3, human, hg19, 3, 0, 198022430
+chr4, human, hg19, 4, 0, 191154276
+chr5, human, hg19, 5, 0, 180915260
+chr6, human, hg19, 6, 0, 171115067
+chr7, human, hg19, 7, 0, 159138663
+chr8, human, hg19, 8, 0, 146364022
+chr9, human, hg19, 9, 0, 141213431
+chr10, human, hg19, 10, 0, 135534747
+chr11, human, hg19, 11, 0, 135006516
+chr12, human, hg19, 12, 0, 133851895
+chr13, human, hg19, 13, 0, 115169878
+chr14, human, hg19, 14, 0, 107349540
+chr15, human, hg19, 15, 0, 102531392
+chr16, human, hg19, 16, 0, 90354753
+chr17, human, hg19, 17, 0, 81195210
+chr18, human, hg19, 18, 0, 78077248
+chr19, human, hg19, 19, 0, 59128983
+chr20, human, hg19, 20, 0, 63025520
+chr21, human, hg19, 21, 0, 48129895
+chr22, human, hg19, 22, 0, 51304566
