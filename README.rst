@@ -65,6 +65,17 @@ Example:
     rmsk=hide
     phyloP46wayPlacental=hide
 
+Or save visual settings (track height, mode, or track data from track hubs, etc.) as session, and set as shared. See example figure 'reports/session1_session1_default.pdf' from calling fetch_ucsc.py with parameters "-r params/regions/session1.txt -t params/tracks_options/session1.txt".
+
+Example:
+
+::
+
+    [session]
+    UserName=ucscfetch
+    UserSessionName=hg19SessionEx1
+
+
 Look at params/tracks_options/default.txt for an example Regions file.
 
 3. the Browser config file

@@ -1,0 +1,3 @@
+#label, organism, chromosome, start, end, description, upstream, downstream
+PTBP1, human, hg19, chr19, 797392, 812327, "polypyrimidine tract binding protein 1", 10000, 10000
+SOD1, human, hg19, chr21, 33031597, 33041570, "superoxide dismutase 1", 10000, 10000

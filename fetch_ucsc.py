@@ -51,6 +51,8 @@ def get_options():
             default='2x2')
     parser.add_option('--title', dest='title',
             help='a title for the analysis. Used in output reports.', default='')
+    parser.add_option('--noreport', dest='noreport', action='store_true',
+            help="Don't write report", default=False)
     parser.add_option('-d', '--debug', dest='debug', action='store_true',
             help='set debug mode on', default=False)
     (options, args) = parser.parse_args()
@@ -196,6 +198,9 @@ def get_tracks_options(tracksfile):
     Example Tracks file:
 
     ::
+        [session]
+        UserName=xxx
+        UserSessionName=yyy # it must be set as shared by user while fetching
 
         [visual_options]
 
@@ -230,6 +235,18 @@ def get_tracks_options(tracksfile):
 #    print parser.items('tracks')
 
     tracksfile_string = ''
+
+    # Session
+    if parser.has_section("session"):
+        tracksfile_string += '&hgS_doOtherUser=submit'
+        for x in parser.items("session"):
+            if x[0] == 'UserName':
+                tracksfile_string += "&hgS_otherUserName=%s" % x[1]
+            elif x[0] == 'UserSessionName':
+                tracksfile_string += "&hgS_otherUserSessionName=%s" % x[1]
+        # don't need to use other settings
+        return tracksfile_string
+
     if parser.items('tracks'): 
         tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('tracks')])
     if parser.items('visual_options'):
@@ -468,7 +485,8 @@ def main():
     reportfilename = "reports/%s" %  title_suffix
 
     layout = [int(x) for x in options.layout.split('x')]
-    write_report(regions, reportfilename, title_suffix, layout, False)
+    if not options.noreport:
+        write_report(regions, reportfilename, title_suffix, layout, False)
 
 if __name__ == "__main__":
     import doctest
