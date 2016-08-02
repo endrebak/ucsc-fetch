@@ -1,5 +1,25 @@
+Fork of the brilliant Giovanni Dall'Olio's UCSC-fetch. Use the original, this
+repo is me jotting down things I'd like to change eventually whilst making some
+minor changes.
+
+- make python3 compatible (see https://github.com/hickford/MechanicalSoup )
+- replace much of config options with command line arguments
+- choose report output filename
+- remove binary files from repo
+- choose pdf names
+- use bigwig from command line (by using git lfs and git config)
+- allow to use bed file together instead of region file (can have metadata as 7th col, genome/species/upstream/downstream set on command line)
+- create report sorted in order of input?
+- install instructions that show pip commands
+- know the time it will take so use click library to show time left and progress bar
+- wait after downloading so that you do not need to wait 15 secs for single picture
+- add a note on how to display custom bigwig files as full
+
+
+---
+
 =============
-UCSC fetch 
+UCSC fetch
 =============
 
 
@@ -25,7 +45,7 @@ one per line. The script will generate a separate .pdf file for each entry in th
 Example:
 
 ::
-  
+
     #label, organism, assembly, chromosome, start, end, description, upstream, downstream
     IL10, human, hg18, chr1, 205007571, 205012462, "involved in immunity", 10000, 1000
     PRNP, human, hg18, chr20, 4615157, 4630234, "Prion Protein", 10000, 10000
@@ -92,7 +112,7 @@ files of the UCSC server, and will be used by UCSC administrators in case they
 need to contact you about usage policy. Be careful not to exceed with the
 queries, as this may create problems to other users of the UCSC browser.
 
-Example: 
+Example:
 
 ::
 
@@ -102,8 +122,8 @@ Example:
     password =
     user-agent = Mechanize client to get screenshots from the UCSC browser. Home
     page: https://bitbucket.org/dalloliogm/ucsc-fetch
-    email = 
-    httpproxy = 
+    email =
+    httpproxy =
     httproxy_port =
     httproxy_password =
 

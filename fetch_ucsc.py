@@ -3,7 +3,7 @@
 
 Usage:
 ======
-    
+
     python fetch_ucsc.py --regions <regions file> --tracks <tracks file> --ucsc_url <ucsc options file>
 
 Input files:
@@ -16,7 +16,7 @@ Input files:
 """
 
 import optparse
-import sys 
+import sys
 try:
     import mechanize
 except ImportError:
@@ -32,37 +32,95 @@ import subprocess
 import logging
 import string
 
-def get_options():
-    parser = optparse.OptionParser(usage="usage: %prog -r <regions file> -t <tracks file> -b <browser config file> [-o <output folxder>]")
 
-    parser.add_option('-r', '--regions', '--regions_file', '--region', dest='regionsfile',
-            help='CSV file containing list of regions to analyze', default='')
-    parser.add_option('-t', '--tracks', '--params', dest='tracksfile',
-            help='file containing list of tracks to show, and other parameters', default='')
-    parser.add_option('-u', '-b', '--ucsc', '--ucsc_file', '--browser', '--config', '--browser_config', dest='browser_config_file',
-            help='file containing URL to the UCSC browser, and eventually username and password', default='params/browser_config/default.txt')
-    parser.add_option('-o', '-f', '--output', '--output-folder', '--folder', dest='outputfolder',
-            help='output folder (default=results)', default='results/')
-    parser.add_option('-s', '--skip-existing', '-e', '--skip-downloaded', dest='skip_existing', action='store_true',
-            help='Skip downloading UCSC screenshots that have already been downloaded. Useful for debugging purposes, or if you need to add a region to list of regions that you have already downloaded in a previous run.', 
-            default=False)
-    parser.add_option('-l', '--layout', dest='layout', 
-            help='Output layout: how to dispose multiple screenshots in a single page. must be a string in the format "numberxnumber", e.g. 3x2, where 3 is the number of rows, and 2 is the number of columns',
-            default='2x2')
-    parser.add_option('--title', dest='title',
-            help='a title for the analysis. Used in output reports.', default='')
-    parser.add_option('--noreport', dest='noreport', action='store_true',
-            help="Don't write report", default=False)
-    parser.add_option('-d', '--debug', dest='debug', action='store_true',
-            help='set debug mode on', default=False)
+def get_options():
+    parser = optparse.OptionParser(
+        usage=
+        "usage: %prog -r <regions file> -t <tracks file> -b <browser config file> [-o <output folxder>]")
+
+    parser.add_option('-r',
+                      '--regions',
+                      '--regions_file',
+                      '--region',
+                      dest='regionsfile',
+                      help='CSV file containing list of regions to analyze',
+                      default='')
+
+    parser.add_option(
+        '-t',
+        '--tracks',
+        '--params',
+        dest='tracksfile',
+        help='file containing list of tracks to show, and other parameters',
+        default='')
+    parser.add_option(
+        '-u',
+        '-b',
+        '--ucsc',
+        '--ucsc_file',
+        '--browser',
+        '--config',
+        '--browser_config',
+        dest='browser_config_file',
+        help=
+        'file containing URL to the UCSC browser, and eventually username and password',
+        default='params/browser_config/default.txt')
+    parser.add_option('-o',
+                      '-f',
+                      '--output',
+                      '--output-folder',
+                      '--folder',
+                      dest='outputfolder',
+                      help='output folder (default=results)',
+                      default='results/')
+    parser.add_option(
+        '-s',
+        '--skip-existing',
+        '-e',
+        '--skip-downloaded',
+        dest='skip_existing',
+        action='store_true',
+        help=
+        'Skip downloading UCSC screenshots that have already been downloaded. Useful for debugging purposes, or if you need to add a region to list of regions that you have already downloaded in a previous run.',
+        default=False)
+    parser.add_option(
+        '-l',
+        '--layout',
+        dest='layout',
+        help=
+        'Output layout: how to dispose multiple screenshots in a single page. must be a string in the format "numberxnumber", e.g. 3x2, where 3 is the number of rows, and 2 is the number of columns',
+        default='2x2')
+    parser.add_option('--title',
+                      dest='title',
+                      help='a title for the analysis. Used in output reports.',
+                      default='')
+    parser.add_option('--noreport',
+                      dest='noreport',
+                      action='store_true',
+                      help="Don't write report",
+                      default=False)
+    parser.add_option('-d',
+                      '--debug',
+                      dest='debug',
+                      action='store_true',
+                      help='set debug mode on',
+                      default=False)
+
+    parser.add_option('-p',
+                      '--python2',
+                      help='Path to python2 executable.',
+                      default='')
+
     (options, args) = parser.parse_args()
-    
+
     if options.debug is True:
-        logging.basicConfig(format='%(levelname)s:%(pathname)s (line %(lineno)s): %(message)s', level=logging.DEBUG)
+        logging.basicConfig(
+            format='%(levelname)s:%(pathname)s (line %(lineno)s): %(message)s',
+            level=logging.DEBUG)
         logging.basicConfig(level=logging.DEBUG)
 
 #    print options.inputfile
-    # required options
+# required options
     if options.regionsfile == '':
         parser.print_help()
         parser.error('fetch_ucsc.py: regions file not defined.')
@@ -82,32 +140,35 @@ def get_browser_config(optionsfile):
 
     example browser options file:
 
-    :: 
+    ::
         [browser]
         ucsc_base_url = http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18
         username =
         password =
         User-agent = Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1
-        email = 
+        email =
 
         [proxy]
-        proxy = 
+        proxy =
         port =
-        password = 
+        password =
     """
     browseroptions = {}
     configparser = ConfigParser.ConfigParser()
     configparser.read(optionsfile)
-#    print(configparser.items("browser"))
-#    print configparser.options("browser")
-#    browseroptions = dict(configparser.items("browser") + configparser.items("output"))
+    #    print(configparser.items("browser"))
+    #    print configparser.options("browser")
+    #    browseroptions = dict(configparser.items("browser") + configparser.items("output"))
     browseroptions = dict(configparser.items("browser"))
 
     if browseroptions['email'] == '':
-        raise ConfigParser.Error('the email field is required. Please edit %s and add your email address' % optionsfile)
+        raise ConfigParser.Error(
+            'the email field is required. Please edit %s and add your email address'
+            % optionsfile)
 
     return browseroptions
 #    return configparser
+
 
 def get_regions(regionsfile):
     """
@@ -115,7 +176,7 @@ def get_regions(regionsfile):
 
     Example Regions file:
 
-    :: 
+    ::
 
         #label, chromosome, start, end
         sampleregion, chr1, 10000, 20000
@@ -135,13 +196,16 @@ def get_regions(regionsfile):
     """
     regions = {}
 
-    
     regionsfile_contents = open(regionsfile, 'r')
 
-    scanner = csv.reader(regionsfile_contents, delimiter=',', skipinitialspace=True)
+    scanner = csv.reader(regionsfile_contents,
+                         delimiter=',',
+                         skipinitialspace=True)
     current_position = 0
 
     for fields in scanner:
+        for i, v in enumerate(fields):
+            print(i, v)
         if fields == []:
             logging.debug("no fields")
             continue
@@ -164,15 +228,22 @@ def get_regions(regionsfile):
 
         if not chromosome.startswith('chr'):
             chromosome = 'chr' + chromosome
-        
+
         start = int(start) - upstream
         end = int(end) + downstream
         if regions.has_key(label):
             raise Exception("duplicated entry in Regions file")
-        regions[label] = {'position': current_position, 'label': label, 'organism': organism, 'assembly': assembly, 'chromosome': chromosome, 
-                'start': start, 'end': end, 'description': description}
+        regions[label] = {'position': current_position,
+                          'label': label,
+                          'organism': organism,
+                          'assembly': assembly,
+                          'chromosome': chromosome,
+                          'start': start,
+                          'end': end,
+                          'description': description}
     print regions
     return regions
+
 
 def regions_to_bed(regions):
     """
@@ -183,11 +254,11 @@ def regions_to_bed(regions):
             'PAR1X': {'start': -9999, 'assembly': 'hg18', 'description': 'Pseudo-autosomal Region, chromosome X', 'position': 10, 'end': 2719520, 'organism': 'human', 'chromosome': 'chrX', 'label': 'PAR1X'}, \
             'ZGPAT': {'start': 61799835, 'assembly': 'hg18', 'description': 'another gene chosen at random', 'position': 12, 'end': 61847982, 'organism': 'human', 'chromosome': 'chr20', 'label': 'ZGPAT'}\
             }
-    
+
     >>> example_bed_output = '''track name=regions description="Region of interest" useScore=0\
 chr21   43452210    43475982    HSPB4 \
 chr22 2000 6000 cloneB 900 - 2000 6000 0 2 433,399, 0,3601'''
-    
+
     """
 
 
@@ -231,8 +302,8 @@ def get_tracks_options(tracksfile):
     parser.optionxform = str
 
     parser.read(tracksfile)
-#    parser.items("tracks")
-#    print parser.items('tracks')
+    #    parser.items("tracks")
+    #    print parser.items('tracks')
 
     tracksfile_string = ''
 
@@ -247,20 +318,25 @@ def get_tracks_options(tracksfile):
         # don't need to use other settings
         return tracksfile_string
 
-    if parser.items('tracks'): 
-        tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('tracks')])
+    if parser.items('tracks'):
+        tracksfile_string += '&' + '&'.join(['='.join(i)
+                                             for i in parser.items('tracks')])
     if parser.items('visual_options'):
-        tracksfile_string += '&' + '&'.join(['='.join(i) for i in parser.items('visual_options')])
+        tracksfile_string += '&' + '&'.join(['='.join(
+            i) for i in parser.items('visual_options')])
 
     # Custom tracks
     if parser.has_section("custom_tracks"):
-        tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[1] for x in parser.items("custom_tracks")])
+        tracksfile_string += '&hgt.customText=' + '&hgt.customText='.join([x[
+            1] for x in parser.items("custom_tracks")])
 
     # Custom Hubs
     if parser.has_section("track_hubs"):
-        tracksfile_string += '&hubUrl=' + '&hubUrl='.join([x[1] for x in parser.items("track_hubs")])
+        tracksfile_string += '&hubUrl=' + '&hubUrl='.join([x[
+            1] for x in parser.items("track_hubs")])
 
     return tracksfile_string
+
 
 def initialize_browser(browseroptions):
     """
@@ -276,7 +352,7 @@ def initialize_browser(browseroptions):
 
     # Browser options
     br.set_handle_equiv(True)
-#    br.set_handle_gzip(True)
+    #    br.set_handle_gzip(True)
     br.set_handle_redirect(True)
     br.set_handle_referer(True)
     br.set_handle_robots(False)
@@ -285,9 +361,9 @@ def initialize_browser(browseroptions):
     br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 
     # Want debugging messages?
-#    br.set_debug_http(True)
-#    br.set_debug_redirects(True)
-#    br.set_debug_responses(True)
+    #    br.set_debug_http(True)
+    #    br.set_debug_redirects(True)
+    #    br.set_debug_responses(True)
 
     # User-Agent (this is cheating, ok?)
     br.addheaders = [('User-agent', browseroptions['user-agent'])]
@@ -295,52 +371,61 @@ def initialize_browser(browseroptions):
 
     if browseroptions["httpproxy"] != '':
         # proxy password not implemented
-        br.setproxies({'http': "%s:%s" % (browseroptions['httproxy'], browseroptions['httproxy_port'])})
+        br.setproxies({'http': "%s:%s" % (browseroptions['httproxy'],
+                                          browseroptions['httproxy_port'])})
 
     if browseroptions['username'] != '':
         baseurl = re.findall('http://.*?/', browseroptions['ucsc_base_url'])[0]
-        br.add_password(baseurl, browseroptions['username'], browseroptions['password'])
+        br.add_password(baseurl, browseroptions['username'],
+                        browseroptions['password'])
 
     return br
 
-def get_screenshot(options, br, browseroptions, tracksoptions_string, title_suffix, chromosome, organism, assembly, start, end, label):
+
+def get_screenshot(options, br, browseroptions, tracksoptions_string,
+                   title_suffix, chromosome, organism, assembly, start, end,
+                   label):
     """
-    Get a screenshot from a UCSC browser installation. 
+    Get a screenshot from a UCSC browser installation.
 
     Note: to manually get a screenshot from UCSC, just add &hgt.psOutput=on to the URL, and then download the third link
     """
-    
-    outputfilename = "%s/%s_%s.pdf" % (options.outputfolder, label, title_suffix)
-    
+
+    outputfilename = "%s/%s_%s.pdf" % (options.outputfolder, label,
+                                       title_suffix)
+
     print "\ngetting screenshot for %s.... " % label
-    target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (organism, assembly) + '&position=%s:%s-%s' % (chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
+    target_url = browseroptions['ucsc_base_url'] + '?org=%s&db=%s' % (
+        organism, assembly) + '&position=%s:%s-%s' % (
+            chromosome, start, end) + tracksoptions_string + '&hgt.psOutput=on'
 
     if options.skip_existing and os.path.exists(outputfilename):
-        print "\nOutput file %s already exists, and skip_existing is true. So I am not downloading this file." % (outputfilename)
+        print "\nOutput file %s already exists, and skip_existing is true. So I am not downloading this file." % (
+            outputfilename)
     else:
-        # wait interval between different searches. 
+        # wait interval between different searches.
         query_interval = int(browseroptions['query_interval'])
         print "\nWaiting %s seconds between each query, following UCSC guidelines (http://genome.ucsc.edu/FAQ/FAQdownloads.html#download2)" % query_interval
         print "Press Ctrl-C to cancel."
         sys.stdout.write("[" + "-" * query_interval + "]\n ")
         for i in xrange(query_interval):
-            time.sleep(1) # do real work here
+            time.sleep(1)  # do real work here
             # update the bar
             sys.stdout.write("x")
             sys.stdout.flush()
 
 #        time.sleep(query_interval)
 
-        # connecting to browser
+# connecting to browser
         logging.debug(target_url)
         print(target_url)
         br.open(target_url)
 
         pdf_url = br.click_link(url_regex=re.compile(".*\.pdf"), nr=0)
         response = br.open(pdf_url)
-        
+
         pdf_contents = response.read()
-        
+
         outputfolder = options.outputfolder
         if outputfolder == '':
             outputfolder = 'results'
@@ -356,7 +441,13 @@ def get_screenshot(options, br, browseroptions, tracksoptions_string, title_suff
     browser_url = target_url.replace('&hgt.psOutput=on', '')
     return browser_url
 
-def write_report(regions, reportoutputfilename, title_suffix, layout, sort_regions=True):
+
+def write_report(regions,
+                 reportoutputfilename,
+                 title_suffix,
+                 layout,
+                 args,
+                 sort_regions=True):
     """use RestructuredText to write a multi-page report
 
 
@@ -368,40 +459,43 @@ def write_report(regions, reportoutputfilename, title_suffix, layout, sort_regio
     * [sort_regions] -> do you want regions to be sorted alphabetically?
 
     Example Output (if installed, rst2pdf is used to convert to pdf):
-    
+
     ::
         reportoutputfilename, page 1
         ==============================
 
         .. csv-table::
-    
+
             gene1, gene2
             results/gene1.pdf , results/gene2.pdf
             gene3, gene4
             results/gene3.pdf , results/gene4.pdf
             gene5, gene6
             results/gene5.pdf , results/gene6.pdf
-        
+
         reportoutputfilename, page 2
         ==============================
 
         .. csv-table::
-    
+
             gene7, gene8
             results/gene7.pdf , results/gene8.pdf
 
         (layout is (3, 2))
 
     """
-#    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
-#    print regions
+    #    regions = sorted(['.. image:: ../results/' + region[0] + '.pdf' for region in regions], reverse=True)
+    #    print regions
     if sort_regions:
         regions_keys = sorted(regions.keys(), reverse=True)
-    else: 
+    else:
         # untested
-#        regions_keys = regions.keys()
-        print [(regions[key]['label'], regions[key]['position']) for key in regions.keys()]
-        regions_keys = sorted(regions.keys(), key=lambda x:regions[x]['position'], reverse=True)
+        #        regions_keys = regions.keys()
+        print[(regions[key]['label'], regions[key]['position'])
+              for key in regions.keys()]
+        regions_keys = sorted(regions.keys(),
+                              key=lambda x: regions[x]['position'],
+                              reverse=True)
         print regions_keys
 #        regions_keys.reverse()
 #    print regions
@@ -413,12 +507,13 @@ def write_report(regions, reportoutputfilename, title_suffix, layout, sort_regio
     .. csv-table::
         :delim: |
 '''
+
     report_text = newpage_template % (reportoutputfilename.rsplit('/')[1], 1)
     lastline = False
     current_page = 1
 
     while regions_keys:
-        for row in xrange(layout[0]): 
+        for row in xrange(layout[0]):
             report_text += '\n\t'
             thisrow_regionkeys = []
             for column in xrange(layout[1]):
@@ -429,64 +524,86 @@ def write_report(regions, reportoutputfilename, title_suffix, layout, sort_regio
 #                    print "raised Index Error", thisrow_regionkeys
 
 #            print thisrow_regionkeys
-            report_text += ' | '.join(['`%s <%s>`_ (%s)' % (regions[region_key]['label'], regions[region_key]['browser_url'], regions[region_key]['description']) for region_key in thisrow_regionkeys]) + '\n\t'
-            report_text += ' | '.join(['.. image:: ../results/' + regions[region_key]['label'] + '_' + title_suffix + '.pdf' for region_key in thisrow_regionkeys])
+            report_text += ' | '.join(['`%s <%s>`_ (%s)' % (
+                regions[region_key]['label'], regions[region_key][
+                    'browser_url'], regions[region_key]['description']
+            ) for region_key in thisrow_regionkeys]) + '\n\t'
+            report_text += ' | '.join(['.. image:: ../results/' + regions[
+                region_key]['label'] + '_' + title_suffix + '.pdf'
+                                       for region_key in thisrow_regionkeys])
             report_text += '\n\t | '
             report_text += '\n\t | '
 #        if lastline is not True:
 #        print "lastline", lastline
         current_page += 1
         if regions_keys != []:
-            report_text += '\n\n' + newpage_template % (reportoutputfilename.rsplit('/')[1], current_page)
+            report_text += '\n\n' + newpage_template % (
+                reportoutputfilename.rsplit('/')[1], current_page)
 
 #    print report_text
     report = open(reportoutputfilename + '.rst', 'w')
     report.write(report_text)
     report.close()
 
-#    print reportoutputfilename
+    #    print reportoutputfilename
     # rst2pdf options: -s (apply stylesheet), -b 1 (break pages), -q (quiet execution)
-    try:
-        logging.debug(' '.join(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q']))
-        subprocess.call(['rst2pdf', reportoutputfilename + '.rst', '-s', './scripts/simple.css', '-b', '1', '-q'])
-        print "\n\nSaved multi-page report at %s.pdf\n\n" % reportoutputfilename
-    except:
-        print "Error when calling rst2pdf. Please check that rst2pdf is installed correctly. http://code.google.com/p/rst2pdf/"
+    # try:
+    options = []
+    print(args)
+    print(args.python2)
+    if args.python2:
+        options.append(args.python2 + 'rst2pdf')
+    else:
+        options.append("rest2pdf")
+
+    options.extend([reportoutputfilename + '.rst', '-s',
+                    './scripts/simple.css', '-b', '1', '-q'])
+    print(" ".join(options))
+    subprocess.call(options)
+    print "\n\nSaved multi-page report at %s.pdf\n\n" % reportoutputfilename
+    # except:
+    #     print "Error when calling rst2pdf. Please check that rst2pdf is installed correctly. http://code.google.com/p/rst2pdf/"
 
 
 def main():
-#if __name__ == '__main__':
+    #if __name__ == '__main__':
     (options, args) = get_options()
     browseroptions = get_browser_config(options.browser_config_file)
-#    print browseroptions
+    #    print browseroptions
     br = initialize_browser(browseroptions)
 
     trackoptions_string = get_tracks_options(options.tracksfile)
 
     regions = get_regions(options.regionsfile)
 
-    # suffix for output file names 
+    # suffix for output file names
     if options.title == '':
-        title_suffix = "%s_%s_%s" % (options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
-                options.tracksfile.rsplit('/', 1)[-1].split('.')[0],
-                options.browser_config_file.rsplit('/', 1)[-1].split('.')[0])
+        title_suffix = "%s_%s_%s" % (
+            options.regionsfile.rsplit('/', 1)[-1].split('.')[0],
+            options.tracksfile.rsplit('/', 1)[-1].split('.')[0],
+            options.browser_config_file.rsplit('/', 1)[-1].split('.')[0])
     else:
-        sanitize_re = re.compile("[^-_. %s%s]" % (string.ascii_letters, string.digits))
-        title_suffix = sanitize_re.sub('',  options.title)
+        sanitize_re = re.compile("[^-_. %s%s]" %
+                                 (string.ascii_letters, string.digits))
+        title_suffix = sanitize_re.sub('', options.title)
 
     for (label, region) in regions.items():
-#        (label, organism, assembly, chromosome, start, end, description) = region
-        browser_url = get_screenshot(options, br, browseroptions, trackoptions_string, title_suffix, region['chromosome'], region['organism'], region['assembly'], 
-                region['start'], region['end'], region['label'])
+        #        (label, organism, assembly, chromosome, start, end, description) = region
+        browser_url = get_screenshot(
+            options, br, browseroptions, trackoptions_string, title_suffix,
+            region['chromosome'], region['organism'], region['assembly'],
+            region['start'], region['end'], region['label'])
         regions[label]['browser_url'] = browser_url
-#        print browser_url
+        #        print browser_url
         print
 
-    reportfilename = "reports/%s" %  title_suffix
+    reportfilename = "reports/%s" % title_suffix
 
     layout = [int(x) for x in options.layout.split('x')]
     if not options.noreport:
-        write_report(regions, reportfilename, title_suffix, layout, False)
+        write_report(regions, reportfilename, title_suffix, layout, options,
+                     False)
+
 
 if __name__ == "__main__":
     import doctest
